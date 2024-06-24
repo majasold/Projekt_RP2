@@ -1,6 +1,6 @@
 <?php
 
-require_once 'db.class.php';
+require_once __DIR__ . '/../../../db.class.php';
 
 $db = DB::getConnection();
 
@@ -74,6 +74,21 @@ try {
 
 echo "Napravio tablicu dvorana.<br />";
 
+try {
+    $st = $db->prepare(
+        'CREATE TABLE IF NOT EXISTS film (' .
+            'id_film int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
+            'ime_filma varchar(255) NOT NULL,' .
+            'url_trailer varchar(255) NOT NULL' .
+            ')'
+    );
+
+    $st->execute();
+} catch (PDOException $e) {
+    exit("PDO error [create film]: " . $e->getMessage());
+}
+
+echo "Napravio tablicu film.<br />";
 
 try {
     $st = $db->prepare(
@@ -84,8 +99,8 @@ try {
             'datum date NOT NULL,' .
             'vrijeme time NOT NULL,' .
             'regular_cijena int NOT NULL,' .
-            'FOREIGN KEY (id_dvorana) REFERENCES dvorana(id_dvorana) ON DELETE CASCADE' .
-            'FOREIGN KEY (id_filma) REFERENCES film(id_filma) ON DELETE CASCADE' .
+            'FOREIGN KEY (id_dvorana) REFERENCES dvorana(id_dvorana) ON DELETE CASCADE,' .
+            'FOREIGN KEY (id_filma) REFERENCES film(id_film) ON DELETE CASCADE' .
             ')'
     );
 
@@ -116,22 +131,6 @@ try {
 }
 
 echo "Napravio tablicu rezervacija.<br />";
-
-try {
-    $st = $db->prepare(
-        'CREATE TABLE IF NOT EXISTS film (' .
-            'id_film int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
-            'ime_filma varchar(255) NOT NULL,' .
-            'url_trailer varchar(255) NOT NULL,' .
-            ')'
-    );
-
-    $st->execute();
-} catch (PDOException $e) {
-    exit("PDO error [create film]: " . $e->getMessage());
-}
-
-echo "Napravio tablicu film.<br />";
 
 
 //-------------- popunjavanje tablica-----------------------

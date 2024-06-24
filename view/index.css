@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Port+Lligat+Slab&display=swap');
+
+body
+{
+    color: white;
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(20,139,160,1) 50%, rgba(20,93,160,1) 100%);
+    max-width: 100%;
+    margin: auto;
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+}
+
+.header{
+    width: 100%;
+}
+
+.header .title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Port Lligat Slab", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.header .routes{
+    margin: 0 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header .routes .right, .header .routes .left{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.header .routes a{
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.header .routes a:hover{
+    color:rgba(20,139,160,1);
+    background: #ccc;
+    
+}
