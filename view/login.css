@@ -1,0 +1,72 @@
+
+body
+{
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(20,139,160,1) 50%, rgba(20,93,160,1) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+form
+{
+    width: 500px;
+    border: 2px solid #706D6D;
+    padding: 30px;
+    background: #424242;
+    border-radius: 15px;
+}
+
+h2 
+{
+    text-align: center;
+    margin-bottom: 40px;
+    color: white;
+    font-family: "Port Lligat Slab", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+input
+{
+    display: block;
+    border: 2px solid #ccc;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+label
+{
+    color: white;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+button, .buttons a
+{
+    float: right;
+    background: #148ba0;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.buttons button:hover,
+.buttons a:hover
+{
+    opacity: .7;
+}
+
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+}
