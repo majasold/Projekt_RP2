@@ -33,5 +33,11 @@
         </div>
     </div>
 </body>
+<?php
+if (!empty($this->message)) {
+    echo '<h3>' . $this->message . '</h3><br>';
+    exit();
+}
+?>
 
 </html>

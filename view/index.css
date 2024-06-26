@@ -52,3 +52,48 @@ body
     background: #ccc;
     
 }
+
+.movies-container {
+    margin: 50px 50px;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.movie-card {
+    position: relative;
+    flex-basis: calc(33.33% - 20px);
+    height: 300px;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 100ms ease-in;
+}
+
+.movie-card:hover {
+    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.4);
+}
+
+.movie-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    filter: brightness(40%);
+}
+
+.movie-name {
+    position: absolute;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    z-index: 2;
+    width: 100%;
+    padding: 25px 30px;
+    box-sizing: border-box;
+}
