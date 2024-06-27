@@ -18,6 +18,12 @@ body
     width: 100%;
 }
 
+footer p{
+    text-align: center;
+    padding: 3px;
+    color: white;
+}
+
 .header .title{
     display: flex;
     justify-content: center;
