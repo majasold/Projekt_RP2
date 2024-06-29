@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../services/movieService.class.php';
-// require_once __DIR__ . '/../services/projectionService.class.php'; jednom kad se napravi projectionService.class.php i projection.class.php
+require_once __DIR__ . '/../services/projectionService.class.php'; 
 
 class ProjectionsController
 {
@@ -32,6 +32,6 @@ class ProjectionsController
         } else {
             $this->message = "Needed id in URL for movie.";
         }
-        // require_once __DIR__ . '/../view/overview_projections.php'; kad se napravi overview_projections.php s tablicom svih projekcija ($projections) za taj film
+        require_once __DIR__ . '/../view/overview_projections.php';
     }
 }
