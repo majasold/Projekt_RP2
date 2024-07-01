@@ -1,13 +1,14 @@
 <?php
 class Movie
 {
-    protected $id, $name, $url;
+    protected $id, $name, $url, $description;
 
-    function __construct($id, $name, $url)
+    function __construct($id, $name, $url, $description)
     {
         $this->id = $id;
         $this->name = $name;
         $this->url = $url;
+        $this->description = $description;
     }
 
     function __get($property)

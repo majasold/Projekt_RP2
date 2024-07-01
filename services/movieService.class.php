@@ -14,7 +14,7 @@ class MovieService
         $movies = [];
 
         while ($row = $st->fetch()) {
-            $movie = new Movie($row['id_film'], $row['ime_filma'], $row['url_trailer']);
+            $movie = new Movie($row['id_film'], $row['ime_filma'], $row['url_trailer'], $row['opis']);
             $movies[] = $movie;
         }
         if (sizeof($movies) === 0)
@@ -31,7 +31,7 @@ class MovieService
 
         $row = $st->fetch();
         if ($row !== false) {
-            $movie = new Movie($row['id_film'], $row['ime_filma'], $row['url_trailer']);
+            $movie = new Movie($row['id_film'], $row['ime_filma'], $row['url_trailer'], $row['opis']);
             return $movie;
         }
         return false;
