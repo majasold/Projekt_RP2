@@ -1,6 +1,6 @@
 <?php
 
-require_once _DIR_ . '/../../../db.class.php';
+require_once __DIR__ . '/../../../db.class.php';
 
 $db = DB::getConnection();
 

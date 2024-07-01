@@ -1,9 +1,9 @@
 <?php
 
-require_once _DIR_ . '/../services/movieService.class.php';
-require_once _DIR_ . '/../services/projectionService.class.php';
-require_once _DIR_ . '/../services/hallService.class.php';
-require_once _DIR_ . '/../services/reservationService.class.php';
+require_once __DIR__ . '/../services/movieService.class.php';
+require_once __DIR__ . '/../services/projectionService.class.php';
+require_once __DIR__ . '/../services/hallService.class.php';
+require_once __DIR__ . '/../services/reservationService.class.php';
 
 class ProjectionsController
 {
@@ -45,6 +45,6 @@ class ProjectionsController
         } else {
             $this->message = "Needed id in URL for movie.";
         }
-        require_once _DIR_ . '/../view/overview_projections.php';
+        require_once __DIR__ . '/../view/overview_projections.php';
     }
 }
