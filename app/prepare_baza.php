@@ -164,15 +164,15 @@ echo "Ubacio u tablicu dvorana.<br />";
 try {
     $st = $db->prepare('INSERT INTO film(ime_filma, url_trailer) VALUES (:ime_filma, :url_trailer)');
 
-    $st->execute(array('ime_filma' => 'Izvrnuto obrnuto 2', 'url_trailer' => 'https://www.youtube.com/watch?v=TWYtG2XkkAI'));
+    $st->execute(array('ime_filma' => 'Izvrnuto obrnuto 2', 'url_trailer' => 'https://www.youtube.com/embed/TWYtG2XkkAI'));
     $id_filma1 = $db->lastInsertId();
-    $st->execute(array('ime_filma' => 'Kung Fu Panda 4', 'url_trailer' => 'https://www.youtube.com/watch?v=c-FQGzvwTPc'));
+    $st->execute(array('ime_filma' => 'Kung Fu Panda 4', 'url_trailer' => 'https://www.youtube.com/embed/c-FQGzvwTPc'));
     $id_filma2 = $db->lastInsertId();
-    $st->execute(array('ime_filma' => 'DINA: drugi dio', 'url_trailer' => 'https://www.youtube.com/watch?v=Fi2u6naeQOY'));
+    $st->execute(array('ime_filma' => 'DINA: drugi dio', 'url_trailer' => 'https://www.youtube.com/embed/Fi2u6naeQOY'));
     $id_filma3 = $db->lastInsertId();
-    $st->execute(array('ime_filma' => 'Građanski rat', 'url_trailer' => 'https://www.youtube.com/watch?v=vvx5ZRjHApE'));
+    $st->execute(array('ime_filma' => 'Građanski rat', 'url_trailer' => 'https://www.youtube.com/embed/vvx5ZRjHApE'));
     $id_filma4 = $db->lastInsertId();
-    $st->execute(array('ime_filma' => 'Garfield', 'url_trailer' => 'https://www.youtube.com/watch?v=juW1f73PwSI'));
+    $st->execute(array('ime_filma' => 'Garfield', 'url_trailer' => 'https://www.youtube.com/embed/juW1f73PwSI'));
     $id_filma5 = $db->lastInsertId();
 } catch (PDOException $e) {
     exit("PDO error [insert projekcija]: " . $e->getMessage());

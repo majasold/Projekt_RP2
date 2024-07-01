@@ -1,11 +1,11 @@
 <?php
 class Projection{
-    protected $id_projection, $id_auditorium, $id_movie, $date, $time, $regular_price;
+    protected $id_projection, $id_hall, $id_movie, $date, $time, $regular_price;
 
-    function __construct($id_projection, $id_auditorium, $id_movie, $date, $time, $regular_price)
+    function __construct($id_projection, $id_hall, $id_movie, $date, $time, $regular_price)
     {
         $this->id_projection = $id_projection;
-        $this->id_auditorium = $id_auditorium;
+        $this->id_hall = $id_hall;
         $this->id_movie = $id_movie;
         $this->date = $date;
         $this->time = $time;

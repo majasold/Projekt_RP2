@@ -14,7 +14,7 @@ class ProjectionService
         $projections = [];
 
         while ($row = $st->fetch()) {
-            $projection = new Projeciton($row['id_projekcija'], $row['id_dvorana'], $row['id_filma'], $row['datum'], $row['vrijeme'], $row['regular_cijena']);
+            $projection = new Projection($row['id_projekcija'], $row['id_dvorana'], $row['id_filma'], $row['datum'], $row['vrijeme'], $row['regular_cijena']);
             $projections[] = $projection;
         }
         if (sizeof($projections) === 0)
@@ -32,7 +32,7 @@ class ProjectionService
         $projections = [];
 
         while ($row = $st->fetch()) {
-            $projection = new Projeciton($row['id_projekcija'], $row['id_dvorana'], $row['id_filma'], $row['datum'], $row['vrijeme'], $row['regular_cijena']);
+            $projection = new Projection($row['id_projekcija'], $row['id_dvorana'], $row['id_filma'], $row['datum'], $row['vrijeme'], $row['regular_cijena']);
             $projections[] = $projection;
         }
         if (sizeof($projections) === 0)

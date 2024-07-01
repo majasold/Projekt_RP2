@@ -103,3 +103,8 @@ footer p{
     padding: 25px 30px;
     box-sizing: border-box;
 }
+
+.movie-spec {
+    display: inline-block;
+    vertical-align: top;
+}
