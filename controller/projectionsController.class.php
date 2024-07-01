@@ -20,7 +20,7 @@ class ProjectionsController
             if (!$movie) {
                 $this->message = "There is no movie with id = " . $idMovie;
             } else {
-                echo $movie->id . ' ' . $movie->name . ' ' . $movie->url;
+                echo $movie->id . ' ' . $movie->name . ' ' . $movie->url . $movie->description;
                 /* TO DO 
                 $ps = new ProjectionService();
                 $projections = $ps->getProjectionsByMovieId($idMovie);
