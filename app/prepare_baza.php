@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../../db.class.php';
+require_once _DIR_ . '/../../../db.class.php';
 
 $db = DB::getConnection();
 
@@ -79,7 +79,8 @@ try {
         'CREATE TABLE IF NOT EXISTS film (' .
             'id_film int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
             'ime_filma varchar(255) NOT NULL,' .
-            'url_trailer varchar(255) NOT NULL' .
+            'url_trailer varchar(255) NOT NULL,' .
+            'opis varchar(500) NOT NULL' .
             ')'
     );
 
@@ -162,17 +163,32 @@ try {
 echo "Ubacio u tablicu dvorana.<br />";
 
 try {
-    $st = $db->prepare('INSERT INTO film(ime_filma, url_trailer) VALUES (:ime_filma, :url_trailer)');
+    $st = $db->prepare('INSERT INTO film(ime_filma, url_trailer, opis) VALUES (:ime_filma, :url_trailer, :opis)');
 
-    $st->execute(array('ime_filma' => 'Izvrnuto obrnuto 2', 'url_trailer' => 'https://www.youtube.com/embed/TWYtG2XkkAI'));
+    $st->execute(array(
+        'ime_filma' => 'Izvrnuto obrnuto 2', 'url_trailer' => 'https://www.youtube.com/embed/TWYtG2XkkAI',
+        'opis' => 'Izvrnuto obrnuto 2 je nastavak velikog hita studija Disney i Pixar iz 2015. godine u kojem smo upoznali djevojčicu Riley i njezinih pet emocija. U nastavku Riley slavi 13. rođendan i stiže jedna sasvim nova emocija koja će unijeti još veći kaos (zapravo stiže ih još nekoliko!)!'
+    ));
     $id_filma1 = $db->lastInsertId();
-    $st->execute(array('ime_filma' => 'Kung Fu Panda 4', 'url_trailer' => 'https://www.youtube.com/embed/c-FQGzvwTPc'));
+    $st->execute(array(
+        'ime_filma' => 'Kung Fu Panda 4', 'url_trailer' => 'https://www.youtube.com/embed/c-FQGzvwTPc',
+        'opis' => 'Nakon tri pustolovine koje prkose smrti, pobjeđujući kriminalce svjetske klase svojom neusporedivom hrabrošću i suludim borilačkim vještinama, Poe, Zmajev ratnik (nominiran za Zlatni globus Jack Black), pozvan je jednom na počinak. Umjesto toga, on je izabran da postane duhovni vođa Doline mira.'
+    ));
     $id_filma2 = $db->lastInsertId();
-    $st->execute(array('ime_filma' => 'DINA: drugi dio', 'url_trailer' => 'https://www.youtube.com/embed/Fi2u6naeQOY'));
+    $st->execute(array(
+        'ime_filma' => 'DINA: drugi dio', 'url_trailer' => 'https://www.youtube.com/embed/Fi2u6naeQOY',
+        'opis' => '„DINA: Drugi dio“ prati nastavak mitološkog putovanja Paula Atreidesa, mladića sudbinom predodređenog za međugalaktički sukob za vlast. Kao sin ubijenog vođe vojvode Atreidesa i misteriozne Lady Jessice, Paul stoji pred ultimativnim ispitom – suočiti se sa strahovima dok ga sudbina i moćne nevidljive sile vode u pustinje udaljenog planeta Arrakis.'
+    ));
     $id_filma3 = $db->lastInsertId();
-    $st->execute(array('ime_filma' => 'Građanski rat', 'url_trailer' => 'https://www.youtube.com/embed/vvx5ZRjHApE'));
+    $st->execute(array(
+        'ime_filma' => 'Građanski rat', 'url_trailer' => 'https://www.youtube.com/embed/vvx5ZRjHApE',
+        'opis' => 'U bliskoj budućnosti radnja prati skupinu novinara koji kreću na putovanje kroz SAD usred sve intenzivnijeg građanskog rata koji je zahvatio cijelu zemlju. Tijekom svog putovanja nailaze na nekoliko po život opasnih izazova. Istovremeno, vlada se pretvara u distopijski režim, a radikalne skupine često sudjeluju u političkom nasilju.'
+    ));
     $id_filma4 = $db->lastInsertId();
-    $st->execute(array('ime_filma' => 'Garfield', 'url_trailer' => 'https://www.youtube.com/embed/juW1f73PwSI'));
+    $st->execute(array(
+        'ime_filma' => 'Garfield', 'url_trailer' => 'https://www.youtube.com/embed/juW1f73PwSI',
+        'opis' => 'Nakon što se njegov divni, lagodni i siti život s Jonom i Odiejem potpuno promijeni dolaskom Garfieldovog oca Vica, Garfield će morati na avanturu koja će ga naučiti nečemu neočekivanom…'
+    ));
     $id_filma5 = $db->lastInsertId();
 } catch (PDOException $e) {
     exit("PDO error [insert projekcija]: " . $e->getMessage());
@@ -218,4 +234,4 @@ try {
     exit("PDO error [insert rezervacija]: " . $e->getMessage());
 }
 
-echo "Ubacio u tablicu rezervacija.<br />";
+echo "Ubacio u tablicu rezervacija.<br />";
