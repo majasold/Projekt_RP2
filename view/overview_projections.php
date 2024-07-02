@@ -1,26 +1,41 @@
 <?php require_once __DIR__ . '/header.php'; ?>
 
-<h1 class="movie-spec" ><?php echo $movie->name; ?></h1>
-<div class="movie-spec">
-    <iframe width="560" height="315" src=<?php echo $movie->url; ?> frameborder="0" allowfullscreen></iframe>
+<div class="movie-spec-container">
+    <div class="movie-spec">
+        <h1><?php echo $movie->name; ?></h1>
+        <p><?php echo $movie->description; ?></p>
+    </div>
+
+    <div class="movie-spec">
+        <div class="video-wrapper">
+            <iframe src="<?php echo $movie->url; ?>" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
 </div>
 
+<br>
+
 <div class="projections-container">
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Cinema Hall</th>
-            <th>Free Spaces</th>
-        </tr>
-        <?php foreach ($projForOverview as $proj) : ?>
-            <tr>
-                <td><?php echo $proj["projection"]->date; ?></td>
-                <td><?php echo $proj["projection"]->time; ?></td>
-                <td><?php echo $proj["projection"]->id_hall; ?></td>
-                <td><?php echo $proj["freeSpaces"]; ?></td>
+    <table class="projections">
+        <thead class="projections">
+            <tr class="projections">
+                <th class="projections">Date</th>
+                <th class="projections">Time</th>
+                <th class="projections">Cinema Hall</th>
+                <th class="projections">Free Spaces</th>
             </tr>
-        <?php endforeach; ?>
+        </thead>
+
+        <tbody>
+            <?php foreach ($projForOverview as $proj) : ?>
+                <tr class="projections">
+                    <td class="projections"><?php echo $proj["projection"]->date; ?></td>
+                    <td class="projections"><?php echo $proj["projection"]->time; ?></td>
+                    <td class="projections"><?php echo $proj["projection"]->id_hall; ?></td>
+                    <td class="projections"><?php echo $proj["freeSpaces"]; ?></td>
+                </tr>
+            <?php endforeach; ?>  
+        </tbody>
     </table>
 </div>
 
