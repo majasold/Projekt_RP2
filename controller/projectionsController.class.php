@@ -8,11 +8,7 @@ require_once __DIR__ . '/../services/reservationService.class.php';
 class ProjectionsController
 {
     public $message = "";
-    /* za MY RESERVATIONS -> U reservationsController
-    function index()
-    {
-    }
-    */
+
     function overview()
     {
         $projForOverview = [];
@@ -32,12 +28,13 @@ class ProjectionsController
                 } else {
                     foreach ($projections as $projection) {
                         $hs = new HallService();
-                        $hallSize = $hs->getHallSizeByHallId($projection->id_hall);
+                        $hall = $hs->getHallByHallId($projection->id_hall);
+                        $hallSize = $hall->nr_rows * $hall->nr_cols;
                         $rs = new ReservationService();
-                        $takenSpaces = $rs->getNrOfReservationsByProjectionId($projection->id_projection);
-                        $freeSp = $hallSize - $takenSpaces;
+                        $takenSeats = $rs->getNrOfReservationsByProjectionId($projection->id_projection);
+                        $freeSeats = $hallSize - $takenSeats;
 
-                        $proj = array("projection" => $projection, "freeSpaces" => $freeSp);
+                        $proj = array("projection" => $projection, "freeSeats" => $freeSeats);
                         $projForOverview[] = $proj;
                     }
                 }

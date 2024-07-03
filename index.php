@@ -16,7 +16,8 @@ $routes = array(
     array('con' => 'home', 'action' => 'index', 'role' => 0),
     array('con' => 'login', 'action' => 'register', 'role' => 0),
     array('con' => 'login', 'action' => 'addUser', 'role' => 0),
-    array('con' => 'projections', 'action' => 'overview', 'role' => 0)
+    array('con' => 'projections', 'action' => 'overview', 'role' => 0),
+    array('con' => 'reservations', 'action' => 'newReservation1', 'role' => 1)
 );
 
 if (!isset($_GET['rt'])) {
