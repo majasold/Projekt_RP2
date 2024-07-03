@@ -1,5 +1,6 @@
 <?php
-class Projection{
+class Projection
+{
     protected $id_projection, $id_hall, $id_movie, $date, $time, $regular_price;
 
     function __construct($id_projection, $id_hall, $id_movie, $date, $time, $regular_price)

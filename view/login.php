@@ -10,7 +10,7 @@
 
 <body>
     <form action="index.php?rt=login/checkUser" method="post">
-        <h2>PresentingMoviesFilms</h2>
+        <h2>PresentingMovies&Films</h2>
         <h3> <?php echo $this->message; ?></h3>
         <label>Username</label>
         <input type="text" name="username" placeholder="Username"><br>
