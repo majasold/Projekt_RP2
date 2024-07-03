@@ -36,14 +36,16 @@ if (!isset($_GET['rt'])) {
     }
     if (isset($_SESSION['user'])) {
         $role = $_SESSION['user']->role;
-        foreach ($routes as $route) {
-            if ($route['con'] === $con and $route['action'] === $action) {
-                if ($role < $route['role']) {
-                    $con = 'home';
-                    $action = 'index';
-                }
-                break;
+    } else {
+        $role = 0;
+    }
+    foreach ($routes as $route) {
+        if ($route['con'] === $con and $route['action'] === $action) {
+            if ($role < $route['role']) {
+                $con = 'login';
+                $action = 'index';
             }
+            break;
         }
     }
 }
