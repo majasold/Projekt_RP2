@@ -12,6 +12,7 @@ $role = 3 moze pristupiti samo admin
 $routes = array(
     array('con' => 'login', 'action' => 'index', 'role' => 0),
     array('con' => 'login', 'action' => 'checkUser', 'role' => 0),
+    array('con' => 'login', 'action' => 'checkGoogle', 'role' => 0),
     array('con' => 'login', 'action' => 'logout', 'role' => 1),
     array('con' => 'home', 'action' => 'index', 'role' => 0),
     array('con' => 'login', 'action' => 'register', 'role' => 0),
