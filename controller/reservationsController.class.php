@@ -66,4 +66,32 @@ class ReservationsController
         }
         require_once __DIR__ . '/../view/newReservation_1.php';
     }
+
+    function reservations() //opcija RESERVATION za $role = 2
+    {
+        $allReservations = [];
+        $rs = new ReservationService();
+        $reservations = $rs->getReservations();
+
+        if(!$reservations){
+          $this->message = "There are no reservations.";
+        } else {
+	     foreach ($reservations as $reservation) {
+              $ps = new ProjectionService();
+              $projection = $ps->getProjectionById($reservation->id_projection);
+              $ms = new MovieService();
+              $movie = $ms->getMovieById($projection->id_movie);
+              $us = new UserService();
+              $user = $us->getUserById($reservation->id_user);
+
+              $res = array("reservation" => $reservation, "projection" => $projection, "movie" => $movie, "user" => $user);
+              $allReservations[] = $res;
+            }
+		        usort($allReservations, function ($a, $b) {
+                return strtotime($b["projection"]->date) - strtotime($a["projection"]->date);
+            });
+        }
+
+        require_once __DIR__ . '/../view/allreservations.php';
+    }
 }
