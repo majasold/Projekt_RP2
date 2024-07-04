@@ -5,6 +5,24 @@ require_once __DIR__ . '/../model/reservation.class.php';
 
 class ReservationService
 {
+    function getReservationsByUser($idUser)
+    {
+        $db = DB::getConnection();
+        $st = $db->prepare('SELECT * FROM rezervacija WHERE id_korisnik = :id_korisnik');
+        $st->execute(['id_korisnik' => $idUser]);
+
+        $reservations = [];
+
+        while ($row = $st->fetch()) {
+            $reservation = new Reservation($row['id_rezervacija'], $row['id_korisnik'], $row['id_projekcija'], $row['red'], $row['stupac'], $row['cijena'], $row['created']);
+            $reservations[] = $reservation;
+        }
+        if (sizeof($reservations) === 0)
+            return false;
+
+        return $reservations;
+    }
+
     function getNrOfReservationsByProjectionId($idProjection)
     {
         $nrOfTakenSeats = 0;
