@@ -20,7 +20,7 @@ $routes = array(
     array('con' => 'projections', 'action' => 'overview', 'role' => 0),
     array('con' => 'reservations', 'action' => 'newReservation1', 'role' => 1),
     array('con' => 'reservations', 'action' => 'index', 'role' => 1),
-    //array('con' => 'reservations', 'action' => 'deleteReservation', 'role' => 2),
+    array('con' => 'reservations', 'action' => 'deleteReservation', 'role' => 2),
     array('con' => 'reservations', 'action' => 'reservations', 'role' => 2)
 );
 

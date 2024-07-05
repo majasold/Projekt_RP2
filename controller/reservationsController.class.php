@@ -67,6 +67,29 @@ class ReservationsController
         require_once __DIR__ . '/../view/newReservation_1.php';
     }
 
+    function deleteReservation() //brisanje razervacije za $role = 2
+    {
+      $rs = new ReservationService();
+      $reservations = $rs->getReservations();
+      if(isset($_POST['reservations']) && is_array($_POST['reservations'])){
+          $id_reservations = $_POST['reservations'];
+          if(!$reservations){
+            $this->message = "There are no reservations.";
+          } else {
+              if(!$id_reservations){
+                $this->message = "There are no reservations to delete.";
+              } else {
+                  foreach ($id_reservations as $id_res) {
+                        $rs->deleteReservationById($id_res);
+                    }
+              }
+          }
+      } else {
+         $this->message = "There are no reservations to delete.";
+      }
+      $this->reservations();
+    }
+
     function reservations() //opcija RESERVATION za $role = 2
     {
         $allReservations = [];

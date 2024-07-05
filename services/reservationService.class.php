@@ -41,6 +41,14 @@ class ReservationService
         return $reservations;
     }
 
+    function deleteReservationById($idReservation)
+    {
+        $db = DB::getConnection();
+        $st = $db->prepare('DELETE FROM rezervacija WHERE id_rezervacija = :id_rezervacija');
+        $st->execute(['id_rezervacija' => $idReservation]);
+
+    }
+
     function getNrOfReservationsByProjectionId($idProjection)
     {
         $nrOfTakenSeats = 0;
