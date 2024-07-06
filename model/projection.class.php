@@ -1,5 +1,5 @@
 <?php
-class Projection
+class Projection implements JsonSerializable
 {
     protected $id_projection, $id_hall, $id_movie, $date, $time, $regular_price;
 
@@ -25,5 +25,16 @@ class Projection
             $this->$property = $value;
 
         return $this;
+    }
+
+    public function jsonSerialize() {
+        return [
+            'id_reservation' => $this->id_projection,
+            'id_hall' => $this->id_hall,
+            'id_movie' => $this->id_movie,
+            'date' => $this->date,
+            'time' => $this->time,
+            'regular_price' => $this->regular_price
+        ];
     }
 }

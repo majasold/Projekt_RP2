@@ -1,12 +1,12 @@
 <?php
 class User
 {
-    protected $id, $username, $name, $surname, $password_hash, $role;
+    protected $id, $email, $name, $surname, $password_hash, $role;
 
-    function __construct($id, $username, $name, $surname, $password_hash, $role)
+    function __construct($id, $email, $name, $surname, $password_hash, $role)
     {
         $this->id = $id;
-        $this->username = $username;
+        $this->email = $email;
         $this->name = $name;
         $this->surname = $surname;
         $this->password_hash = $password_hash;
