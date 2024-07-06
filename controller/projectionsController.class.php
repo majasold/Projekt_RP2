@@ -44,4 +44,53 @@ class ProjectionsController
         }
         require_once __DIR__ . '/../view/overview_projections.php';
     }
+
+
+
+    function newProjection()
+    {
+        $newProj = new ProjectionService();
+        if (
+            !empty($_POST['id_movie']) and
+            !empty($_POST['date']) and !empty($_POST['time'])
+            and !empty($_POST['id_hall']) and !empty($_POST['regular_price'])
+        ) {
+            $id_movie = $_POST['id_movie'];//tu je select pa mozda drugacije
+            $date = $_POST['date'];
+            $time = $_POST['time'];
+            $cinema_hall = $_POST['id_hall'];
+            $ticket_price = $_POST['id_price'];
+            $allFieldsOK = true;
+
+            if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
+                $allFieldsOK = false;
+                $this->message = "Invalid date format.";
+                require_once __DIR__ . '/../view/newprojection.php';
+            } elseif (!preg_match('/^\d{2}:\d{2}$/', $time)) {
+                $allFieldsOK = false;
+                $this->message = "Invalid time format";
+                require_once __DIR__ . '/../view/newprojection.php';
+            } elseif (!preg_match('/^[A-Za-z0-9 ]{1,50}$/', $id_hall)) {
+                $allFieldsOK = false;
+                $this->message = "Cinema Hall name should be between 1 and 50 alphanumeric characters.";
+                require_once __DIR__ . '/../view/newprojection.php';
+            } elseif (!is_numeric($regular_price) || $regular_price <= 0) {
+                $allFieldsOK = false;
+                $this->message = "Ticket Price must be a positive number.";
+                require_once __DIR__ . '/../view/newprojection.php';
+            } 
+
+            if ($allFieldsOK) {
+                if (!$us->insertNewProjection($id_movie, $date, $time, $id_hall, $regular_price)) {
+                    $this->message = "Error in adding new projection. Please try again.";
+                    require_once __DIR__ . '/../view/newprojection.php';
+                } else {
+                    header('Location: index.php?rt=projections');//?
+                }
+            }
+        } else {
+            $this->message = "All spaces are mandatory.";
+            require_once __DIR__ . '/../view/newprojection.php';
+        }
+    }
 }
