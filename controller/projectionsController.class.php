@@ -81,7 +81,7 @@ class ProjectionsController
             } 
 
             if ($allFieldsOK) {
-                if (!$us->insertNewProjection($id_movie, $date, $time, $id_hall, $regular_price)) {
+                if (!$us->insertNewProjection($id_projekcija, $id_hall, $id_movie, $date, $time, $regular_price)) {
                     $this->message = "Error in adding new projection. Please try again.";
                     require_once __DIR__ . '/../view/newprojection.php';
                 } else {

@@ -55,4 +55,18 @@ class ProjectionService
 
         return $projections;
     }
+
+    function insertNewProjection($id_projekcija, $id_hall, $id_movie, $date, $time, $regular_price)
+    {
+        $db = DB::getConnection();
+        $st = $db->prepare('INSERT INTO projekcija(id_projekcija, id_dvorana, $id_filma, date, time, regular_cijena) VALUES (:id_projekcija, :id_dvorana, :id_filma, :date, :time, :regular_cijena)');
+        $st->execute(array('id_projekcija' => $id_projekcija, 'id_dvorana' => $id_hall, 'id_filma' => $id_movie, 'date' => $date, 'time' => &time, 'regular_cijena' => $regular_price));
+
+        if ($st->rowCount() > 0) {
+            $id = $db->lastInsertId();//?
+            $proj = $this->getProjectionsByMovieId($id);
+            return $user;
+        }
+        return false;
+    }
 }
