@@ -1,5 +1,5 @@
 <?php
-class Hall
+class Hall implements JsonSerializable
 {
     protected $id_hall, $nr_rows, $nr_cols;
 
@@ -22,5 +22,13 @@ class Hall
             $this->$property = $value;
 
         return $this;
+    }
+
+    public function jsonSerialize() {
+        return [
+            'id_hall' => $this->id_hall,
+            'nr_rows' => $this->nr_rows,
+            'nr_cols' => $this->nr_cols
+        ];
     }
 }

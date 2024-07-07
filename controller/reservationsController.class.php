@@ -10,6 +10,7 @@ class ReservationsController
 {
     public $message = "";
 
+
     function index() // MY RESERVATION za $role = 1
     {
         $myReservations = [];
@@ -41,6 +42,7 @@ class ReservationsController
           require_once __DIR__ . '/../view/myreservations.php';
     }
 
+
     function newReservation1() //rezervacije za $role = 1
     {
         if (isset($_GET['id_projection'])) {
@@ -50,20 +52,39 @@ class ReservationsController
             if (!$projection) {
                 $this->message = "There is no projection with id = " . $idProjection;
             } else {
-                //echo $projection->id_projection . ' ' . $projection->date . ' ' . $projection->time . ' ' . $projection->id_hall;
                 $ms = new MovieService();
                 $movie = $ms->getMovieById($projection->id_movie);
                 $title = $movie->name;
                 $rs = new ReservationService();
                 $reservations = $rs->getReservationsByProjectionId($idProjection);
+
                 $hs = new HallService();
                 $hall = $hs->getHallByHallId($projection->id_hall);
 
-                //$reservationsInHall = array("reservations" => $reservations, "hall" => $hall); mozda mi i netreba...
+                $reservations_json = json_encode($reservations);
+                $projection_json = json_encode($projection);
+                $hall_json = json_encode($hall);
             }
         } else {
             $this->message = "Needed id in URL for projection.";
         }
+        
         require_once __DIR__ . '/../view/newReservation_1.php';
     }
+
+
+    function saveNewReservation1()
+    {
+        if (isset($_GET['my_reservation'])) {
+            // Decode URI component (JSON string) into PHP object or array
+            $jsonData = urldecode($_GET['my_reservation']);
+            $myReservation = json_decode($jsonData, true); // true parameter to get associative array
+
+            //var_dump($myReservation);
+        }
+
+        require_once __DIR__ . '/../view/myNewReservation_1.php';
+
+    }
+
 }
