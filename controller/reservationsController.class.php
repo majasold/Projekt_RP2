@@ -23,42 +23,32 @@ class ReservationsController
                 $title = $movie->name;
                 $rs = new ReservationService();
                 $reservations = $rs->getReservationsByProjectionId($idProjection);
-                //var_dump($reservations);
+
                 $hs = new HallService();
                 $hall = $hs->getHallByHallId($projection->id_hall);
 
-                /*for ($i = 0; $i < count($reservations); $i++) {
-                    echo "Reserved seat in row " . $reservations[$i]->row . " and column " . $reservations[$i]->col;
-                }
-                    
-                foreach ($reservations as $reservation) {
-                    echo "<br>";
-                    echo "Reserved seat in row " . $reservation->row . " and column " . $reservation->col;
-                }*/
-
                 $reservations_json = json_encode($reservations);
-                //echo $reservations_json;
-
-                /*// Output reservations as JSON
-                $reservations_json = json_encode($reservations);
-                if ($reservations_json === false) {
-                    echo "JSON encoding error: " . json_last_error_msg();
-                } else {
-                    echo $reservations_json;
-                }*/
-
-
                 $projection_json = json_encode($projection);
-
                 $hall_json = json_encode($hall);
-                //echo $hall_json;
-
-                
             }
         } else {
             $this->message = "Needed id in URL for projection.";
         }
         
         require_once __DIR__ . '/../view/newReservation_1.php';
+    }
+
+    function saveNewReservation1()
+    {
+        if (isset($_GET['my_reservation'])) {
+            // Decode URI component (JSON string) into PHP object or array
+            $jsonData = urldecode($_GET['my_reservation']);
+            $myReservation = json_decode($jsonData, true); // true parameter to get associative array
+
+            //var_dump($myReservation);
+        }
+
+        require_once __DIR__ . '/../view/myNewReservation_1.php';
+
     }
 }

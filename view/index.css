@@ -208,28 +208,21 @@ footer p{
     display: inline-block;
     vertical-align: top;
     justify-content: space-between;
-
 }
 
 #leftbox {
     float: left;
     width: 33%;
-
-    
 }
 
 #middlebox {
     float: left;
     width: 33%;
-
-    
 }
 
 #rightbox {
     float: right;
     width: 33%;
-
-    
 }
 
 .newReservation1_header, .checkout{
@@ -248,8 +241,6 @@ footer p{
     color: white;
     align-items: center;
     margin: auto;
-    /*justify-content: center;
-    /*height: 100vh;*/
 }
 
 .seat {
@@ -274,14 +265,12 @@ footer p{
     background-color: #9d9b9b;
 }
 
-/* Apply different margin for the first row */
 .row:first-child .seat {
-    margin-bottom: 20px; /* Adjust this value as needed */
+    margin-bottom: 20px; 
 }
 
-/* Apply different margin for the last row */
 .row:last-child .seat {
-    margin-top: 20px; /* Adjust this value as needed */
+    margin-top: 20px; 
 }
 
 .seat:not(.taken):hover {
@@ -314,7 +303,6 @@ footer p{
     height: 70px;
     width: 100%;
     margin: 15px 0;
-    /*transform: rotateX(-45deg);*/
     box-shadow: 0 3px 10px rgba(255, 255, 255, 0.75);
 }
 
@@ -328,8 +316,7 @@ footer p{
     display: flex;
 }
 
-button, .buttons a
-{
+button, .buttons a {
     float: right;
     background: #706d6d;
     padding: 10px 15px;
@@ -341,14 +328,12 @@ button, .buttons a
     font-size: 18px;
 }
 
-.buttons button:hover,
-.buttons a:hover
-{
+.buttons button:hover, .buttons a:hover {
     opacity: .7;
 }
 
 
 .buttons{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
