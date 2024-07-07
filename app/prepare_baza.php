@@ -43,7 +43,7 @@ try {
     $st = $db->prepare(
         'CREATE TABLE IF NOT EXISTS korisnik (' .
             'id_korisnik int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
-            'username varchar(50) NOT NULL,' .
+            'email varchar(50) NOT NULL,' .
             'name varchar(50) NOT NULL,' .
             'surname varchar(50) NOT NULL,' .
             'password_hash varchar(255) NOT NULL,' .
@@ -137,11 +137,11 @@ echo "Napravio tablicu rezervacija.<br />";
 //-------------- popunjavanje tablica-----------------------
 
 try {
-    $st = $db->prepare('INSERT INTO korisnik(username, name, surname, password_hash, role) VALUES (:username, :name, :surname, :password_hash, :role)');
-    $st->execute(array('username' => 'mirko123', 'name' => 'Mirko', 'surname' => 'Mirić', 'password_hash' => password_hash('mirkovasifra', PASSWORD_DEFAULT), 'role' => 3)); //id_korisnik = 1
-    $st->execute(array('username' => 'ana123', 'name' => 'Ana', 'surname' => 'Anić', 'password_hash' => password_hash('aninasifra', PASSWORD_DEFAULT), 'role' => 1)); //id_korisnik = 2 ...
-    $st->execute(array('username' => 'pero123', 'name' => 'Pero', 'surname' => 'Perić', 'password_hash' => password_hash('perinasifra', PASSWORD_DEFAULT), 'role' => 2));
-    $st->execute(array('username' => 'maja123', 'name' => 'Maja', 'surname' => 'Majić', 'password_hash' => password_hash('majinasifra', PASSWORD_DEFAULT), 'role' => 1));
+    $st = $db->prepare('INSERT INTO korisnik(email, name, surname, password_hash, role) VALUES (:email, :name, :surname, :password_hash, :role)');
+    $st->execute(array('email' => 'mirko123@gmail.com', 'name' => 'Mirko', 'surname' => 'Mirić', 'password_hash' => password_hash('mirkovasifra', PASSWORD_DEFAULT), 'role' => 3)); //id_korisnik = 1
+    $st->execute(array('email' => 'ana123@gmail.com', 'name' => 'Ana', 'surname' => 'Anić', 'password_hash' => password_hash('aninasifra', PASSWORD_DEFAULT), 'role' => 1)); //id_korisnik = 2 ...
+    $st->execute(array('email' => 'pero123@gmail.com', 'name' => 'Pero', 'surname' => 'Perić', 'password_hash' => password_hash('perinasifra', PASSWORD_DEFAULT), 'role' => 2));
+    $st->execute(array('email' => 'maja123@gmail.com', 'name' => 'Maja', 'surname' => 'Majić', 'password_hash' => password_hash('majinasifra', PASSWORD_DEFAULT), 'role' => 1));
 } catch (PDOException $e) {
     exit("PDO error [insert korisnik]: " . $e->getMessage());
 }

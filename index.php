@@ -12,12 +12,14 @@ $role = 3 moze pristupiti samo admin
 $routes = array(
     array('con' => 'login', 'action' => 'index', 'role' => 0),
     array('con' => 'login', 'action' => 'checkUser', 'role' => 0),
+    array('con' => 'login', 'action' => 'checkGoogle', 'role' => 0),
     array('con' => 'login', 'action' => 'logout', 'role' => 1),
     array('con' => 'home', 'action' => 'index', 'role' => 0),
     array('con' => 'login', 'action' => 'register', 'role' => 0),
     array('con' => 'login', 'action' => 'addUser', 'role' => 0),
     array('con' => 'projections', 'action' => 'overview', 'role' => 0),
-    array('con' => 'reservations', 'action' => 'newReservation1', 'role' => 1)
+    array('con' => 'reservations', 'action' => 'newReservation1', 'role' => 1),
+    array('con' => 'reservations', 'action' => 'reservations', 'role' => 2)
 );
 
 if (!isset($_GET['rt'])) {
