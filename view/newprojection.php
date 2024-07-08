@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php require_once __DIR__ . '/header.php'; ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEW PROJECTION</title>
-    <link rel="stylesheet" href="./view/login.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-</head>
-
-<body>
-    <form action="index.php?rt=login/addUser" method="post"> //nez sta tu ide
-        <h3> <?php echo $this->message; ?></h3>
+<div class="projections">
+    <form action="index.php?rt=projections/newProjection" method="post"> 
         <label>Movie Title</label>
         <select name="id_movie" id="movies">
             <?php foreach ($movies as $movie): ?>
@@ -20,6 +10,7 @@
                 </option>
             <?php endforeach; ?>
         </select>
+        <br>
 
         <label>Date</label>
         <input type="date" name="date" placeholder="YYYY-MM-DD"><br>
@@ -34,11 +25,13 @@
         <input type="text" name="regular_price"><br>
 
         <br>
-        <div class="buttons">
-            <a href="index.php?rt=login">Login</a> //nesto drugo
+        <h3> <?php echo $this->message; ?></h3>
+        <br>
+        <div class="button">
             <button type="submit">Submit</button>
         </div>
     </form>
-</body>
+</div>   
 
-</html>
+
+<?php require_once __DIR__ . '/footer.php'; ?>

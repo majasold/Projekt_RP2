@@ -189,3 +189,35 @@ footer p{
     border-bottom-right-radius: 15px; 
 }
 
+label
+{
+    color: white;
+    font-size: 18px;
+    margin: 100px 0;
+}
+
+input
+{
+    display: block;
+    border: 2px solid #ccc;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+button
+{
+    float: right;
+    background: #656969;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

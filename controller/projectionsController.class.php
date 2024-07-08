@@ -49,6 +49,10 @@ class ProjectionsController
 
     function newProjection()
     {
+        $title = 'New Projection';
+
+        require_once __DIR__ . '/../view/newprojection.php';
+
         $newProj = new ProjectionService();
         if (
             !empty($_POST['id_movie']) and
