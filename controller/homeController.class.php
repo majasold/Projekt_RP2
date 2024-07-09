@@ -25,6 +25,7 @@ class HomeController
 
         if(isset($_GET['id_korisnik'])){
             $idKorisnik = $_GET['id_korisnik'];
+            $role = $_GET['role'];
             $us = new UserService();
             $user = getUserById($idKorisnik);
             if(!$user){
@@ -37,17 +38,7 @@ class HomeController
                 if (!$projections) {
                     $this->message = "Movie " . $movie->name . "has no projections.";
                 } else {
-                    /*foreach ($projections as $projection) {
-                        $hs = new HallService();
-                        $hall = $hs->getHallByHallId($projection->id_hall);
-                        $hallSize = $hall->nr_rows * $hall->nr_cols;
-                        $rs = new ReservationService();
-                        $takenSeats = $rs->getNrOfReservationsByProjectionId($projection->id_projection);
-                        $freeSeats = $hallSize - $takenSeats;
-
-                        $proj = array("projection" => $projection, "freeSeats" => $freeSeats);
-                        $projForOverview[] = $proj;
-                    }*/
+                    
                 }
             }
         } else {

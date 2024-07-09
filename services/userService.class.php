@@ -59,4 +59,14 @@ class UserService
         }
         return false;
     }
+
+    function updateUserRole($id_korisnik, $role)
+    {
+        $db = DB::getConnection();
+        $query = "UPDATE korisnik SET role = :role WHERE id_korisnik = :id_korisnik";
+        $st = $this->db->prepare($query);
+        $st->bindParam(':role', $role);
+        $st->bindParam(':id_korisnik', $id);
+        return $st->execute();
+    }
 }

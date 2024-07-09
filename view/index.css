@@ -19,10 +19,15 @@ body
 }
 
 footer p{
+    /*position: fixed;*/
+    left: 0;
+    bottom: 0;
+    width: 100%;
     text-align: center;
     padding: 3px;
     color: white;
 }
+
 
 .header .title{
     display: flex;
@@ -104,6 +109,7 @@ footer p{
     box-sizing: border-box;
 }
 
+/*overview_projections*/
 .movie-spec-container {
     display: flex;
     justify-content: space-between;
@@ -189,6 +195,150 @@ footer p{
     border-bottom-right-radius: 15px; 
 }
 
+/*newRegistration_1*/
+
+.newReservation1-container {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.newReservation1 {
+    display: inline-block;
+    vertical-align: top;
+    justify-content: space-between;
+}
+
+#leftbox {
+    float: left;
+    width: 33%;
+}
+
+#middlebox {
+    float: left;
+    width: 33%;
+}
+
+#rightbox {
+    float: right;
+    width: 33%;
+}
+
+.newReservation1_header, .checkout{
+    border-style: solid;
+    border-width: 2px;
+    border-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px;
+}
+
+.hall-container {
+    flex: 1 1 0px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    align-items: center;
+    margin: auto;
+}
+
+.seat {
+    background-color: #444451;
+    height: 12px;
+    width: 15px;
+    margin: 3px;
+    padding: 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.row{
+    display: flex;
+}
+
+.seat.selected{
+    background-color: #6feaf6;
+}
+
+.seat.taken{
+    background-color: #9d9b9b;
+}
+
+.row:first-child .seat {
+    margin-bottom: 20px; 
+}
+
+.row:last-child .seat {
+    margin-top: 20px; 
+}
+
+.seat:not(.taken):hover {
+    transform: scale(1.2);
+}
+
+.showcase .seat:not(.taken):hover {
+    transform: scale(1);
+}
+
+.showcase {
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.showcase li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+}
+
+.showcase li small {
+    margin-left: 5px;
+}
+
+.screen {
+    background-color: #fff;
+    height: 70px;
+    width: 100%;
+    margin: 15px 0;
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.75);
+}
+
+.hall-cont {
+    perspective: 1000px;
+    margin-bottom: 30px;
+}
+
+.confirm_reservation {
+    justify-content: flex-end;
+    display: flex;
+}
+
+button, .buttons a {
+    float: right;
+    background: #706d6d;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.buttons button:hover, .buttons a:hover {
+    opacity: .7;
+}
+
+
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+}
+
+/*new Projection*/
 label
 {
     color: white;
@@ -204,20 +354,4 @@ input
     padding: 10px;
     margin: 10px 0;
     border-radius: 5px;
-}
-
-button
-{
-    float: right;
-    background: #656969;
-    padding: 10px 15px;
-    color: white;
-    border-radius: 5px;
-    border: none;
-    text-decoration: none;
-    cursor: pointer;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
 }

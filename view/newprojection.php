@@ -2,7 +2,7 @@
 
 <div class="projections">
     <form action="index.php?rt=projections/newProjection" method="post"> 
-        <label>Movie Title</label>
+        <label>Movie Title</label><br>
         <select name="id_movie" id="movies">
             <?php foreach ($movies as $movie): ?>
                 <option value="<?php echo htmlspecialchars($movie['id']); ?>">
@@ -10,7 +10,7 @@
                 </option>
             <?php endforeach; ?>
         </select>
-        <br>
+        <br><br>
 
         <label>Date</label>
         <input type="date" name="date" placeholder="YYYY-MM-DD"><br>
