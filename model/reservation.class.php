@@ -28,7 +28,8 @@ class Reservation implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         return [
             'id_reservation' => $this->id_reservation,
             'id_user' => $this->id_user,

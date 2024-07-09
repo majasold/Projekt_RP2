@@ -2,9 +2,13 @@
 
 <h1>Your new reservation</h1>
 <?php
-foreach ($myReservation as $reservation){
+foreach ($successfulReservations as $reservation) {
     echo "<br>";
-    echo "rezervirano je sjedalo u redu " . $reservation['row'] . " i stupcu " . $reservation['col'];
+    echo "Reserved seat in row: " . $reservation->row . " and column: " . $reservation->col . '<br>';
+    echo "Ticket code: (to treba stavit kao link)" . $this->generateURL($reservation->id_reservation, $reservation->created) . '<br>';
+}
+foreach ($notSuccessfulReservations as $reservation) {
+    echo "ERROR: Not reserved seat in row: " . $reservation->row . " and column: " . $reservation->col . '<br>';
 }
 ?>
 
