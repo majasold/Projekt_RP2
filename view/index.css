@@ -265,6 +265,14 @@ footer p{
     background-color: #9d9b9b;
 }
 
+.seat.taken2{
+    background-color: #9d9b9b;
+}
+
+.seat.delete{
+    background-color: #c34747;
+}
+
 .row:first-child .seat {
     margin-bottom: 20px; 
 }
@@ -296,6 +304,41 @@ footer p{
 
 .showcase li small {
     margin-left: 5px;
+}
+
+.price {
+    list-style-type: none; /* Remove default bullets */
+    padding-left: 0; /* Remove default padding */
+}
+
+.price li {
+    padding-left: 25px; /* Add space for custom bullet */
+    position: relative; /* Positioning context for pseudo-element */
+}
+
+.price li::before {
+    content: ''; /* Default empty content */
+    position: absolute; /* Position relative to parent li */
+    left: 0; /* Align to left */
+    font-size: 18px; /* Adjust size */
+}
+
+.price li.positive::before {
+    content: '+';
+    padding-right: 10px; /* Add space between bullet and text */
+}
+
+.price li.negative::before {
+    content: '-';
+    padding-right: 10px; /* Add space between bullet and text */
+}
+
+.price li.positive::before {
+    content: '+';
+}
+
+.price li.negative::before {
+    content: '-';
 }
 
 .screen {

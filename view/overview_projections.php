@@ -28,7 +28,7 @@
 
         <tbody>
             <?php foreach ($projForOverview as $proj) : ?>
-                <tr class="projections" data-href="index.php?rt=reservations/newReservation1&id_projection=<?php echo $proj['projection']->id_projection; ?>">
+                <tr class="projections" data-id-projection="<?php echo $proj["projection"]->id_projection; ?>">
                     <td class="projections"><?php echo $proj["projection"]->date; ?></td>
                     <td class="projections"><?php echo $proj["projection"]->time; ?></td>
                     <td class="projections"><?php echo $proj["projection"]->id_hall; ?></td>
@@ -39,13 +39,20 @@
     </table>
 </div>
 
+
 <script>
+    let role = <?php echo $_SESSION['user']->role; ?>;
+    console.log("role je " + role);
     $(document).ready(function() {
         $('.projections tbody tr').on('click', function() {
-            var href = $(this).data('href');
-            if (href) {
-                window.location.href = href;
+            let projectionId = $(this).data('id-projection');
+            let url;
+            if(role === 1){
+                url = 'index.php?rt=reservations/newReservation1&id_projection=' + projectionId;
+            } else if(role > 1) {
+                url = 'index.php?rt=reservations/newReservation2&id_projection=' + projectionId;
             }
+            window.location.href = url;
         });
     });
 </script>
