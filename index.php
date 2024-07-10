@@ -21,6 +21,9 @@ $routes = array(
     array('con' => 'reservations', 'action' => 'newReservation1', 'role' => 1),
     array('con' => 'reservations', 'action' => 'newReservation2', 'role' => 2),
     array('con' => 'reservations', 'action' => 'reservations', 'role' => 2)
+    array('con' => 'reservations', 'action' => 'reservations', 'role' => 2),
+    array('con' => 'reservations', 'action' => 'ticketCode', 'role' => 1),
+    array('con' => 'reservations', 'action' => 'ticketCodeCheck', 'role' => 2)
 );
 
 if (!isset($_GET['rt'])) {

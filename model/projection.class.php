@@ -27,7 +27,8 @@ class Projection implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         return [
             'id_projection' => $this->id_projection,
             'id_hall' => $this->id_hall,
