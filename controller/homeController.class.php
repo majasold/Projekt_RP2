@@ -23,9 +23,12 @@ class HomeController
     {
         $title = 'CHANGE ROLE';
 
-        if(isset($_GET['id_korisnik'])){
-            $idKorisnik = $_GET['id_korisnik'];
-            $role = $_GET['role'];
+        $message = "";
+
+        $usersForChangeRole = [];
+        if(isset($_POST['id_korisnik'])){
+            $idKorisnik = $_POST['id_korisnik'];
+            $role = $_POST['role'];
             $us = new UserService();
             $user = getUserById($idKorisnik);
             if(!$user){
@@ -33,12 +36,14 @@ class HomeController
             }
             else {
                 //echo $user->id . ' ' . $user->name . ' ' . $user->surname. ' ' .$user->role;
-                $ps = new ProjectionService();
-                $projections = $ps->getProjectionsByMovieId($idMovie);
-                if (!$projections) {
-                    $this->message = "Movie " . $movie->name . "has no projections.";
+                $users = $us->getUsers();
+                if (!$users){
+                    $this->message = "There are no users in data.";
                 } else {
-                    
+                    foreach ($users as $user) {
+                        $list = array("id" => $idKorisnik, "name" => $name, "surname" => $surname, "role" => $role);
+                        $usersForChangeRole[] = $list;
+                    }
                 }
             }
         } else {

@@ -60,6 +60,24 @@ class UserService
         return false;
     }
 
+    function getUsers()
+    {
+        $db = DB::getConnection();
+        $st = $db->prepare('SELECT * FROM korisnik');
+        $st->execute();
+
+        $users = [];
+
+        while ($row = $st->fetch()) {
+            $projection = new User($row['id_korisnik'], $row['name'], $row['surname'], $row['role']);
+            $users[] = $user;
+        }
+        if (sizeof($users) === 0)
+            return false;
+
+        return $users;
+    }
+
     function updateUserRole($id_korisnik, $role)
     {
         $db = DB::getConnection();

@@ -11,11 +11,16 @@
             </tr>
         </thead>
         <tbody>
-             
+            <?php foreach ($usersForChangeRole as $list) : ?>
+                <tr class="projections" data-href="index.php?rt=home/changeRole">
+                    <td class="projections"><?php echo $list["idKorisnik"]->idKorisnik; ?></td>
+                    <td class="projections"><?php echo $list["name"]->name; ?></td>
+                    <td class="projections"><?php echo $list["surname"]->surname; ?></td>
+                    <td class="projections"><?php echo $list["role"]->role; ?></td>
+                </tr>
+            <?php endforeach; ?>  
         </tbody>
     </table>
 </div>
-
-
 
 <?php require_once __DIR__ . '/footer.php'; ?>
