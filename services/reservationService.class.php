@@ -80,4 +80,17 @@ class ReservationService
         }
         return false;
     }
+
+    function deleteReservationByProjectionRowCol($idProjection, $row, $col)
+    {
+
+        $db = DB::getConnection();
+        $st = $db->prepare('DELETE FROM rezervacija WHERE id_projekcija = :id_projekcija AND red = :red AND stupac = :stupac');
+        $st->execute([
+            'id_projekcija' => $idProjection,
+            'red' => $row,
+            'stupac' => $col
+        ]);
+
+    }
 }

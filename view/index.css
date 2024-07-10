@@ -225,6 +225,11 @@ footer p{
     width: 33%;
 }
 
+#rightbox2 {
+    float: right;
+    width: 50%;
+}
+
 .newReservation1_header, .checkout{
     border-style: solid;
     border-width: 2px;

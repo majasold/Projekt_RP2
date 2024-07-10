@@ -104,12 +104,17 @@ class ReservationsController
 
     function saveNewReservation1()
     {
+        $title = "Reservation checkout";
         if (isset($_GET['my_reservation'])) {
             // Decode URI component (JSON string) into PHP object or array
             $jsonData = urldecode($_GET['my_reservation']);
             $myReservation = json_decode($jsonData, true); // true parameter to get associative array
 
             if (sizeof($myReservation) > 0) {
+                $ms = new MovieService();
+                $movie = $ms->getMovieByProjectionId($myReservation[0]['projectionId']);
+                $ps = new ProjectionService();
+                $projection = $ps->getProjectionById($myReservation[0]['projectionId']);
                 $rs = new ReservationService();
                 $successfulReservations = [];
                 $notSuccessfulReservations = [];
@@ -124,6 +129,45 @@ class ReservationsController
             }
         }
         require_once __DIR__ . '/../view/myNewReservation_1.php';
+    }
+
+    function saveNewReservation2()
+    {
+        $title = "Reservation checkout";
+        if (isset($_GET['my_reservation'])) {
+            // Decode URI component (JSON string) into PHP object or array
+            $jsonData = urldecode($_GET['my_reservation']);
+            $myReservation = json_decode($jsonData, true); // true parameter to get associative array
+
+            if (sizeof($myReservation) > 0) {
+                $ms = new MovieService();
+                $movie = $ms->getMovieByProjectionId($myReservation[0]['projectionId']);
+                $ps = new ProjectionService();
+                $projection = $ps->getProjectionById($myReservation[0]['projectionId']);
+                $rs = new ReservationService();
+                $successfulNewReservations = [];
+                $notSuccessfulNewReservations = [];
+                $successfulDelReservations = [];
+                foreach ($myReservation as $reservation) {
+                    if($reservation['act'] === "add"){
+                        $success = $rs->insertNewReservation($_SESSION['user']->id, $reservation['projectionId'], $reservation['row'], $reservation['col'], $reservation['ticketPrice']);
+                        if ($success) {
+                            $successfulNewReservations[] = $success;
+                        } else {
+                            $notSuccessfulNewReservations[] = $success;
+                        }
+                    } else {
+                        $rs->deleteReservationByProjectionRowCol($reservation['projectionId'], $reservation['row'], $reservation['col']);
+                        //if ($success) {
+                            $successfulDelReservations[] = $reservation;
+                        //} else {
+                           // $notSuccessfulDelReservations[] = $reservation;
+                        //}
+                    }
+                }
+            }
+        }
+        require_once __DIR__ . '/../view/myNewReservation_2.php';
     }
 
     function generateURL($idReservation, $created, $codeCheck = false)

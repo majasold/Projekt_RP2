@@ -10,20 +10,34 @@
     </div>
 
     <div class="newReservation1" id="rightbox2">
+
+    
+    <h1>Your deleted reservation</h1>
+
+<?php
+foreach ($successfulDelReservations as $reservation) {
+    echo "<br>";
+    echo "Reserved seat in row: " . $reservation['row'] . " and column: " .  $reservation['col'] . '<br>';
+    
+}
+
+?>
+
+
 <h1>Your new reservation</h1>
 <?php
-foreach ($successfulReservations as $reservation) {
+foreach ($successfulNewReservations as $reservation) {
     echo "<br>";
     echo "Reserved seat in row: " . $reservation->row . " and column: " . $reservation->col . '<br>';
     echo "Ticket code: (to treba stavit kao link)" . $this->generateURL($reservation->id_reservation, $reservation->created) . '<br>';
 }
-foreach ($notSuccessfulReservations as $reservation) {
+foreach ($notSuccessfulNewReservations as $reservation) {
     echo "ERROR: Not reserved seat in row: " . $reservation->row . " and column: " . $reservation->col . '<br>';
 }
 ?>
+    </div>
+</div>
 
-</div>
-</div>
 
 
 <?php require_once __DIR__ . '/footer.php'; ?>
