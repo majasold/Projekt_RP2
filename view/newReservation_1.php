@@ -122,7 +122,7 @@
 
         let $ul = $('<ul></ul>');
         myReservation.forEach(element => {
-            let $li = $('<li></li>').text("row: " + element.row + ", column: " + element.col + ", ticket price: " + element.ticketPrice + "€");
+            let $li = $('<li></li>').text("row: " + element.row +  ", column: " + element.col  +  ", ticket price: " +  element.ticketPrice + "€");
             $ul.append($li);
             totalPrice += element.ticketPrice;
         });
@@ -131,21 +131,17 @@
         $('.total').text('Total price: ' + totalPrice + '€');
     }
 
-    function sendReservation() {
-        if (myReservation.length) {
+    function sendReservation(){
+        if(myReservation.length){
+            console.log(myReservation);
             let jsonData = JSON.stringify(myReservation);
-            console.log(jsonData);
-
-            // Encode JSON string to URI component to pass as query parameter
+            console.log(jsonData); 
+          
             let encodedData = encodeURIComponent(jsonData);
 
-            // Construct the URL with query parameter
             let url = 'index.php?rt=reservations/saveNewReservation1&my_reservation=' + encodedData;
-
-            // Redirect to process.php with the data encoded in the URL
             window.location.href = url;
         }
-
     }
 </script>
 
