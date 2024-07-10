@@ -41,13 +41,13 @@
 
 
 <script>
-    let role = <?php echo $_SESSION['user']->role; ?>;
-    console.log("role je " + role);
     $(document).ready(function() {
         $('.projections tbody tr').on('click', function() {
+            let role = <?php echo isset($_SESSION['user']) ? $_SESSION['user']->role : 0; ?>;
+            console.log("role je " + role);
             let projectionId = $(this).data('id-projection');
             let url;
-            if(role === 1){
+            if(role <= 1){
                 url = 'index.php?rt=reservations/newReservation1&id_projection=' + projectionId;
             } else if(role > 1) {
                 url = 'index.php?rt=reservations/newReservation2&id_projection=' + projectionId;
