@@ -33,13 +33,13 @@
                   <td><?php echo $res["reservation"]->row; ?></td>
                   <td><?php echo $res["reservation"]->col; ?></td>
                   <?php $ticketCode = $this->generateURL($reservation->id_reservation, $reservation->created); ?>
-                  <td><?php echo "Ticket code: <a href='{$ticketCode}' target='_blank'>{$ticketCode}</a><br>" ?></td>
+                  <td><?php echo " <a href='{$ticketCode}' target='_blank'>Ticket code:</a><br>" ?></td>
               </tr>
           <?php endforeach; ?>
         </tbody>
       </table>
   </div>
-  <button type="submit" class="delete">DELETE</button>
+  <button type="submit" class="submit">DELETE</button>
 </form>
 
 <?php require_once __DIR__ . '/footer.php'; ?>
