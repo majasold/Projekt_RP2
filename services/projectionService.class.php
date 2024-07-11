@@ -69,4 +69,12 @@ class ProjectionService
         }
         return false;
     }
+
+    function deleteProjectionById($idProjection)
+    {
+        $db = DB::getConnection();
+        $st = $db->prepare('DELETE FROM projekcija WHERE id_projekcija = :id_projekcija');
+        $st->execute(['id_projekcija' => $idProjection]);
+
+    }
 }

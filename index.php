@@ -20,6 +20,7 @@ $routes = array(
     array('con' => 'login', 'action' => 'addUser', 'role' => 0),
     array('con' => 'projections', 'action' => 'overview', 'role' => 0),
     array('con' => 'projections', 'action' => 'newProjection', 'role' => 3),
+    array('con' => 'projections', 'action' => 'projectionsDelete', 'role' => 0),
     array('con' => 'reservations', 'action' => 'newReservation1', 'role' => 1),
     array('con' => 'reservations', 'action' => 'reservations', 'role' => 2)
 );

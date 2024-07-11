@@ -45,8 +45,6 @@ class ProjectionsController
         require_once __DIR__ . '/../view/overview_projections.php';
     }
 
-
-
     function newProjection()
     {
         $title = 'New Projection';
@@ -97,4 +95,30 @@ class ProjectionsController
             require_once __DIR__ . '/../view/newprojection.php';
         }
     }
+
+    function projectionDelete() //brisanje projekcija za $role = 3
+    {
+        $title = 'Projection';
+
+        $ps = new ProjectionService();
+        $projections = $ps->getProjections();
+        if(isset($_POST['projections']) && is_array($_POST['projections'])){
+            $id_projections = $_POST['projections'];
+            if(!$projections){
+            $this->message = "There are no projections.";
+        } else {
+            if(!$id_projections){
+            $this->message = "There are no reservations to delete.";
+            } else {
+                foreach ($id_projections as $id_proj) {
+                     $ps->deleteProjectionById($id_proj);
+                }
+            }
+        }
+        } else {
+            $this->message = "There are no projections to delete.";
+        }
+        $this->projections();
+        //require_once __DIR__ . '/../view/projectionsDelete.php';
+    }    
 }
