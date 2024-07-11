@@ -11,13 +11,13 @@
 
     <div class="newReservation1" id="rightbox2">
         <div class="newReservation1_description">
-            <?php if (sizeof($successfulReservations) > 0): ?>
+            <?php if (sizeof($successfulNewReservations) > 0): ?>
                 <br>
                 <h1>Your new reservation</h1>
                 <div class="projections-container">
                     <table class="reservations">
                         <tbody>
-                            <?php foreach ($successfulReservations as $reservation) : ?>
+                            <?php foreach ($successfulNewReservations as $reservation) : ?>
                                 <tr class="reservations" >
                                     <td class="reservations"><?php echo "Seat in";  ?></td>
                                     <td class="reservations"><?php echo "row: " . $reservation->row; ?></td>
@@ -30,6 +30,25 @@
                                             </button>
                                         </div>
                                     </td>
+                                </tr>
+                            <?php endforeach; ?>  
+                        </tbody>
+                    </table>
+                </div>
+            <?php endif; ?>
+            <br>
+            <?php if (sizeof($successfulDelReservations) > 0): ?>
+                <br>
+                <h1>Your deleted reservation</h1>
+                <div class="projections-container">
+                    <table class="reservations">
+                        <tbody>
+                            <?php foreach ($successfulDelReservations as $reservation) : ?>
+                                <tr class="reservations" >
+                                    <td class="reservations"><?php echo "Seat in";  ?></td>
+                                    <td class="reservations"><?php echo "row: " . $reservation['row']; ?></td>
+                                    <td class="reservations"><?php echo "and"; ?></td>
+                                    <td class="reservations"><?php echo "col: " . $reservation['col']; ?></td>
                                 </tr>
                             <?php endforeach; ?>  
                         </tbody>

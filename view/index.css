@@ -220,9 +220,18 @@ footer p{
     width: 33%;
 }
 
+#midbox {
+    width: 50%;
+}
+
 #rightbox {
     float: right;
     width: 33%;
+}
+
+#rightbox2 {
+    float: right;
+    width: 65%;
 }
 
 .newReservation1_header, .checkout{
@@ -388,4 +397,38 @@ button, .buttons a {
 	align-items: center;
 	height: 100vh;
 	margin: 0;
+}
+
+.reservations {
+    width: 100%;
+    border-collapse: separate; 
+    border-spacing: 0 10px; 
+    table-layout: fixed;
+    text-align: middle;
+}
+
+.reservations th, .reservations td {
+    padding: 10px 20px; 
+    text-align: center;
+}
+
+.reservations tbody tr {
+    border-radius: 15px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    overflow: hidden; 
+}
+
+.reservations tbody tr td {
+    border-top: 1px solid #f2f2f2; 
+    border-bottom: 1px solid #f2f2f2; 
+}
+
+.reservations th:first-child, .reservations td:first-child {
+    border-top-left-radius: 15px; 
+    border-bottom-left-radius: 15px; 
+}
+
+.reservations th:last-child, .reservations td:last-child {
+    border-top-right-radius: 15px; 
+    border-bottom-right-radius: 15px; 
 }

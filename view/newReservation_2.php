@@ -106,14 +106,30 @@
                 $seat.toggleClass('selected');
                 newReservation = newReservation.filter(obj => (obj.row !== $seat.data('row') || obj.col !== $seat.data('col')));
                 updateCheckout();
+            }else if ($seat.hasClass('delete')){
+                $seat.toggleClass('delete');
+                newReservation = newReservation.filter(obj => (obj.row !== $seat.data('row') || obj.col !== $seat.data('col')));
+                updateCheckout();
             }else if($seat.hasClass('taken2')){
                 $seat.addClass('delete');
-                let newRSeat = {act: "del", projectionId: projection.id_projection,  row: $seat.data('row'), col: $seat.data('col'), ticketPrice: $seat.data('ticketPrice') };
+                let newRSeat = {
+                    act: "del", 
+                    projectionId: projection.id_projection,  
+                    row: $seat.data('row'), 
+                    col: $seat.data('col'), 
+                    ticketPrice: $seat.data('ticketPrice') 
+                };
                 newReservation.push(newRSeat);
                 updateCheckout();
             }else if(!$seat.hasClass('taken2')){
                 $seat.addClass('selected');
-                let newRSeat = {act: "add", projectionId: projection.id_projection,  row: $seat.data('row'), col: $seat.data('col'), ticketPrice: $seat.data('ticketPrice') };
+                let newRSeat = {
+                    act: "add", 
+                    projectionId: projection.id_projection,  
+                    row: $seat.data('row'), 
+                    col: $seat.data('col'), 
+                    ticketPrice: $seat.data('ticketPrice') 
+                };
                 newReservation.push(newRSeat);
                 updateCheckout();
             }
@@ -148,22 +164,12 @@
                 let jsonData = JSON.stringify(newReservation);
                 console.log(jsonData); 
 
-                    // Encode JSON string to URI component to pass as query parameter
                 let encodedData = encodeURIComponent(jsonData);
 
-                    // Construct the URL with query parameter
-                let url = 'index.php?rt=reservations/saveNewReservation1&my_reservation=' + encodedData;
-                    
-                    // Redirect to process.php with the data encoded in the URL
+                let url = 'index.php?rt=reservations/saveNewReservation2&my_reservation=' + encodedData;
                 window.location.href = url;
-   
-
-
             }
-
         }
-
-
 
     </script>
 

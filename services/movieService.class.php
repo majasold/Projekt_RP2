@@ -36,4 +36,18 @@ class MovieService
         }
         return false;
     }
+
+    function getMovieByProjectionId($idProjection)
+    {
+        $db = DB::getConnection();
+        $st = $db->prepare('SELECT f.* FROM film f JOIN projekcija p ON f.id_film = p.id_filma WHERE p.id_projekcija = :id_projekcija');
+        $st->execute(['id_projekcija' => $idProjection]);
+
+        $row = $st->fetch();
+        if ($row !== false) {
+            $movie = new Movie($row['id_film'], $row['ime_filma'], $row['url_trailer'], $row['opis']);
+            return $movie;
+        }
+        return false;
+    }
 }
