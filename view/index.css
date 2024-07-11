@@ -56,7 +56,7 @@ footer p{
 .header .routes a:hover{
     color:rgba(20,139,160,1);
     background: #ccc;
-    
+
 }
 
 .movies-container {
@@ -115,20 +115,20 @@ footer p{
 
 .movie-spec {
     width: 48%;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     text-align: center;
-    flex-direction: column; 
-    justify-content: center;  
+    flex-direction: column;
+    justify-content: center;
 }
 
 .video-wrapper {
     position: relative;
     width: 100%;
-    padding-bottom: 56.25%; 
+    padding-bottom: 56.25%;
     height: 0;
-    overflow: hidden; 
+    overflow: hidden;
     border-radius: 15px;
 }
 
@@ -151,41 +151,84 @@ footer p{
 
 .projections {
     width: 100%;
-    border-collapse: separate; 
-    border-spacing: 0 10px; 
+    border-collapse: separate;
+    border-spacing: 0 10px;
     table-layout: fixed;
     text-align: middle;
 }
 
-.projections th, .projections td {
-    padding: 10px 20px; 
+.table-reservations {
+    width: 96%;
+    padding: 20px;
+    margin: auto;
+}
+
+.reservations {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    table-layout: fixed;
+    text-align: center;
+}
+
+
+.projections th, .projections td, .reservations th, .reservations td {
+    padding: 10px 20px;
     text-align: center;
 }
 
 .projections tbody tr {
-    border-radius: 15px; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-    overflow: hidden; 
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 .projections tbody tr:hover {
     color:rgba(20,139,160,1);
-    background: #ccc; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); 
+    background: #ccc;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .projections tbody tr td {
-    border-top: 1px solid #f2f2f2; 
-    border-bottom: 1px solid #f2f2f2; 
+    border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
 }
 
 .projections th:first-child, .projections td:first-child {
-    border-top-left-radius: 15px; 
-    border-bottom-left-radius: 15px; 
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
 }
 
 .projections th:last-child, .projections td:last-child {
-    border-top-right-radius: 15px; 
-    border-bottom-right-radius: 15px; 
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
+h1.reservation{
+    text-align: center;
+    margin: 20px 10px;
+    width: 100%;
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+}
+
+button.delete {
+    margin-left: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: blue;
+    background-color: #ccc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button.delete:hover {
+    background-color: darkgrey;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
