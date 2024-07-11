@@ -34,6 +34,7 @@
 
         // Replace the original QR code element with the new one
         document.getElementById('qrcode').appendChild(qrCanvas);
+        qrCanvas.style.display = "block";
     };
 </script>
 

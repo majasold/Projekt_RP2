@@ -96,7 +96,7 @@ class ReservationsController
         } else {
             $this->message = "Needed id in URL for projection.";
         }
-        
+
         require_once __DIR__ . '/../view/newReservation_2.php';
     }
 
@@ -128,6 +128,7 @@ class ReservationsController
 
     function generateURL($idReservation, $created, $codeCheck = false)
     {
+        $createdInt = strtotime($created);
         $url = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         // Parse the URL to get the path component
         $parsedUrl = parse_url($url);
@@ -144,9 +145,9 @@ class ReservationsController
             $baseUrl = $parsedUrl['scheme'] . '://' . $parsedUrl['host'] . ':' . $parsedUrl['port'] . $beforeIndex;
         }
         if ($codeCheck == true)
-            return $baseUrl . 'index.php?rt=reservations/ticketCodeCheck&id=' . $idReservation . '&created=' . urlencode($created);
+            return $baseUrl . 'index.php?rt=reservations/ticketCodeCheck&id=' . $idReservation . '&created=' . $createdInt;
         else
-            return $baseUrl . 'index.php?rt=reservations/ticketCode&id=' . $idReservation . '&created=' . urlencode($created);
+            return $baseUrl . 'index.php?rt=reservations/ticketCode&id=' . $idReservation . '&created=' . $createdInt;
     }
 
     function ticketCode() // index.php?rt=reservations/ticketCode&id=1&created=...
@@ -163,7 +164,7 @@ class ReservationsController
         $rs = new ReservationService();
         $reservation = $rs->getReservationById($idReservation);
         if ($reservation) {
-            if ($reservation->created == $created) {
+            if (strtotime($reservation->created) == $created) {
                 $us = new UserService();
                 $user = $us->getUserById($reservation->id_user);
 
