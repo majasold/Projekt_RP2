@@ -119,11 +119,14 @@ class ReservationsController
                 $successfulReservations = [];
                 $notSuccessfulReservations = [];
                 foreach ($myReservation as $reservation) {
-                    $success = $rs->insertNewReservation($_SESSION['user']->id, $reservation['projectionId'], $reservation['row'], $reservation['col'], $reservation['ticketPrice']);
-                    if ($success) {
-                        $successfulReservations[] = $success;
-                    } else {
-                        $notSuccessfulReservations[] = $success;
+                    $existingReservation = $rs->getReservationByProjectionRowCol($reservation['projectionId'], $reservation['row'], $reservation['col']);
+                    if(!$existingReservation){
+                        $success = $rs->insertNewReservation($_SESSION['user']->id, $reservation['projectionId'], $reservation['row'], $reservation['col'], $reservation['ticketPrice']);
+                        if ($success) {
+                            $successfulReservations[] = $success;
+                        } else {
+                            $notSuccessfulReservations[] = $success;
+                        }
                     }
                 }
             }
@@ -150,11 +153,14 @@ class ReservationsController
                 $successfulDelReservations = [];
                 foreach ($myReservation as $reservation) {
                     if($reservation['act'] === "add"){
-                        $success = $rs->insertNewReservation($_SESSION['user']->id, $reservation['projectionId'], $reservation['row'], $reservation['col'], $reservation['ticketPrice']);
-                        if ($success) {
-                            $successfulNewReservations[] = $success;
-                        } else {
-                            $notSuccessfulNewReservations[] = $success;
+                        $existingReservation = $rs->getReservationByProjectionRowCol($reservation['projectionId'], $reservation['row'], $reservation['col']);
+                        if(!$existingReservation){
+                            $success = $rs->insertNewReservation($_SESSION['user']->id, $reservation['projectionId'], $reservation['row'], $reservation['col'], $reservation['ticketPrice']);
+                            if ($success) {
+                                $successfulNewReservations[] = $success;
+                            } else {
+                                $notSuccessfulNewReservations[] = $success;
+                            }
                         }
                     } else {
                         $rs->deleteReservationByProjectionRowCol($reservation['projectionId'], $reservation['row'], $reservation['col']);
@@ -172,6 +178,7 @@ class ReservationsController
 
     function generateURL($idReservation, $created, $codeCheck = false)
     {
+        $createdInt = strtotime($created);
         $url = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         // Parse the URL to get the path component
         $parsedUrl = parse_url($url);
@@ -188,13 +195,14 @@ class ReservationsController
             $baseUrl = $parsedUrl['scheme'] . '://' . $parsedUrl['host'] . ':' . $parsedUrl['port'] . $beforeIndex;
         }
         if ($codeCheck == true)
-            return $baseUrl . 'index.php?rt=reservations/ticketCodeCheck&id=' . $idReservation . '&created=' . urlencode($created);
+            return $baseUrl . 'index.php?rt=reservations/ticketCodeCheck&id=' . $idReservation . '&created=' . $createdInt;
         else
-            return $baseUrl . 'index.php?rt=reservations/ticketCode&id=' . $idReservation . '&created=' . urlencode($created);
+            return $baseUrl . 'index.php?rt=reservations/ticketCode&id=' . $idReservation . '&created=' . $createdInt;
     }
 
     function ticketCode() // index.php?rt=reservations/ticketCode&id=1&created=...
     {
+        $title = "Ticket QR code";
         $idReservation = $_GET['id'];
         $created = $_GET['created'];
         require_once __DIR__ . '/../view/ticket_code.php';
@@ -202,12 +210,13 @@ class ReservationsController
 
     function ticketCodeCheck() // index.php?rt=reservations/ticketCodeCheck&id=1&created=...
     {
+        $title = "Ticket details";
         $created = urldecode($_GET['created']);
         $idReservation = urldecode((int)$_GET['id']);
         $rs = new ReservationService();
         $reservation = $rs->getReservationById($idReservation);
         if ($reservation) {
-            if ($reservation->created == $created) {
+            if (strtotime($reservation->created) == $created) {
                 $us = new UserService();
                 $user = $us->getUserById($reservation->id_user);
 

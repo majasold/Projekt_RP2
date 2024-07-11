@@ -10,20 +10,47 @@
     </div>
 
     <div class="newReservation1" id="rightbox2">
-<h1>Your new reservation</h1>
-<?php
-foreach ($successfulReservations as $reservation) {
-    echo "<br>";
-    echo "Reserved seat in row: " . $reservation->row . " and column: " . $reservation->col . '<br>';
-    echo "Ticket code: (to treba stavit kao link)" . $this->generateURL($reservation->id_reservation, $reservation->created) . '<br>';
-}
-foreach ($notSuccessfulReservations as $reservation) {
-    echo "ERROR: Not reserved seat in row: " . $reservation->row . " and column: " . $reservation->col . '<br>';
-}
-?>
+        <div class="newReservation1_description">
+            <?php if (sizeof($successfulReservations) > 0): ?>
+                <br>
+                <h1>Your new reservation</h1>
+                <div class="projections-container">
+                    <table class="reservations">
+                        <tbody>
+                            <?php foreach ($successfulReservations as $reservation) : ?>
+                                <tr class="reservations" >
+                                    <td class="reservations"><?php echo "Seat in";  ?></td>
+                                    <td class="reservations"><?php echo "row: " . $reservation->row; ?></td>
+                                    <td class="reservations"><?php echo "and"; ?></td>
+                                    <td class="reservations"><?php echo "col: " . $reservation->col; ?></td>
+                                    <td class="reservations">
+                                        <div class="buttons">
+                                            <button class="qr" data-href=<?php echo $this->generateURL($reservation->id_reservation, $reservation->created); ?>>
+                                                ticket QR code
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>  
+                        </tbody>
+                    </table>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
 
-</div>
-</div>
+<script>
+    $(document).ready(function() {
+        $('.qr').on('click', function() {
+            var href = $(this).data('href');
+            if (href) {
+                window.location.href = href;
+            }
+        });
+    });
+</script>
+
 
 
 <?php require_once __DIR__ . '/footer.php'; ?>
