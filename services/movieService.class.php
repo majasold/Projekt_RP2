@@ -50,4 +50,14 @@ class MovieService
         }
         return false;
     }
+
+    function addMovie($movie_title, $embedded_url, $description, $poster_file)
+    {
+        $db = DB::getConnection();
+        $st = $db->prepare('INSERT INTO film(ime_filma, url_trailer, opis) VALUES (:ime_filma, :url_trailer, :opis)');
+        $st->execute(array('ime_filma' => $movie_title, 'url_trailer' => $embedded_url, 'opis' => $description));
+        $id_filma = $db->lastInsertId();
+
+        move_uploaded_file($poster_file, __DIR__ . '/../images/' . 'movie_' . $id_filma . '.jpg');
+    }
 }
