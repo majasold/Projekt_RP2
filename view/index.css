@@ -163,16 +163,8 @@ footer p{
     margin: auto;
 }
 
-.reservations {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 10px;
-    table-layout: fixed;
-    text-align: center;
-}
 
-
-.projections th, .projections td, .reservations th, .reservations td {
+.projections th, .projections td {
     padding: 10px 20px;
     text-align: center;
 }
@@ -204,7 +196,7 @@ footer p{
     border-bottom-right-radius: 15px;
 }
 
-h1.reservation{
+h1.reservation {
     text-align: center;
     margin: 20px 10px;
     width: 100%;
@@ -231,4 +223,18 @@ button.submit {
 button.submit:hover {
     background-color: darkgrey;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+input {
+    width: 60%;
+    padding: 10px;
+    margin: 10px 10px;
+    border-radius: 5px;
+}
+
+label
+{
+    color: white;
+    font-size: 18px;
+    margin: 10px 10px;
 }
