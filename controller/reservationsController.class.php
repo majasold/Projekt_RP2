@@ -13,6 +13,7 @@ class ReservationsController
 
     function index() // MY RESERVATION za $role = 1
     {
+	$title = "My reservations";
         $myReservations = [];
         if (isset($_SESSION['user'])) {
             $idUser = $_SESSION['user']->id;
@@ -73,6 +74,7 @@ class ReservationsController
 
     function deleteReservation() //brisanje razervacije za $role = 2
     {
+      $title = "Reservations";
       $rs = new ReservationService();
       $reservations = $rs->getReservations();
       if(isset($_POST['reservations']) && is_array($_POST['reservations'])){
@@ -96,6 +98,7 @@ class ReservationsController
 
     function reservations() //opcija RESERVATION za $role = 2
     {
+	$title = "Reservations";
         $allReservations = [];
         $rs = new ReservationService();
         $reservations = $rs->getReservations();
@@ -114,9 +117,11 @@ class ReservationsController
               $res = array("reservation" => $reservation, "projection" => $projection, "movie" => $movie, "user" => $user);
               $allReservations[] = $res;
             }
-		        usort($allReservations, function ($a, $b) {
-                return strtotime($b["projection"]->date) - strtotime($a["projection"]->date);
-            });
+		 usort($allReservations, function ($a, $b) {
+            		$dateTimeA = strtotime($a["projection"]->date . ' ' . $a["projection"]->time);
+            		$dateTimeB = strtotime($b["projection"]->date . ' ' . $b["projection"]->time);
+            		return $dateTimeB - $dateTimeA;
+        	});
         }
 
         require_once __DIR__ . '/../view/allreservations.php';

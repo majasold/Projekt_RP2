@@ -22,17 +22,16 @@
                     '<div class="right"><a href="index.php?rt=login">LOGIN</a></div>';
             } else if (isset($_SESSION['user']) and $_SESSION['user']->role === 1) {
                 echo '<div class="left"><a class="active" href="index.php?rt=home">HOME</a></div>' .
-                    '<div class="right"><a href="index.php?rt=home/newMovie">NEW MOVIE</a></div>' .
-                    '<div class="right"><a href="index.php?rt=reservations">MY RESERVATIONS</a></div>' .
+                     '<div class="right"><a href="index.php?rt=reservations">MY RESERVATIONS</a></div>' .
                     '<div class="right"><a href="index.php?rt=login/logout">LOGOUT</a></div>';
             } else if (isset($_SESSION['user']) and $_SESSION['user']->role === 2) {
                 echo '<div class="left"><a class="active" href="index.php?rt=home">HOME</a></div>' .
-                    '<div class="right"><a href="index.php?rt=home/newMovie">NEW MOVIE</a></div>' .
                     '<div class="right"><a href="index.php?rt=reservations/reservations">RESERVATIONS</a></div>' .
                     '<div class="right"><a href="index.php?rt=login/logout">LOGOUT</a></div>';
             } else if (isset($_SESSION['user']) and $_SESSION['user']->role === 3) {
                 echo '<div class="left"><a class="active" href="index.php?rt=home">HOME</a></div>' .
-                    '<div class="right"><a href="index.php?rt=reservations/reservations">RESERVATIONS</a></div>' .
+                    '<div class="right"><a href="index.php?rt=home/newMovie">NEW MOVIE</a></div>' .
+		    '<div class="right"><a href="index.php?rt=reservations/reservations">RESERVATIONS</a></div>' .
                     '<div class="right"><a href="index.php?rt=login/logout">LOGOUT</a></div>';
             }
             ?>
