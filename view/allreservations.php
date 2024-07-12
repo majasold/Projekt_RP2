@@ -33,7 +33,11 @@
                   <td><?php echo $res["reservation"]->row; ?></td>
                   <td><?php echo $res["reservation"]->col; ?></td>
                   <?php $ticketCode = $this->generateURL($reservation->id_reservation, $reservation->created); ?>
-                  <td><?php echo " <a href='{$ticketCode}' target='_blank'>Ticket code:</a><br>" ?></td>
+                  <td><div class= "buttons">
+                          <button class = "qr" data-href = <?php echo " <a href='{$ticketCode}' target='_blank'>Ticket code</a>" ?> >
+                          </button>
+                      </div>
+                  </td>
               </tr>
           <?php endforeach; ?>
         </tbody>
