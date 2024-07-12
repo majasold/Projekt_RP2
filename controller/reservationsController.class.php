@@ -71,6 +71,57 @@ class ReservationsController
         require_once __DIR__ . '/../view/newReservation_1.php';
     }
 
+    function deleteReservation() //brisanje razervacije za $role = 2
+    {
+      $rs = new ReservationService();
+      $reservations = $rs->getReservations();
+      if(isset($_POST['reservations']) && is_array($_POST['reservations'])){
+          $id_reservations = $_POST['reservations'];
+          if(!$reservations){
+            $this->message = "There are no reservations.";
+          } else {
+              if(!$id_reservations){
+                $this->message = "There are no reservations to delete.";
+              } else {
+                  foreach ($id_reservations as $id_res) {
+                        $rs->deleteReservationById($id_res);
+                    }
+              }
+          }
+      } else {
+         $this->message = "There are no reservations to delete.";
+      }
+      $this->reservations();
+    }
+
+    function reservations() //opcija RESERVATION za $role = 2
+    {
+        $allReservations = [];
+        $rs = new ReservationService();
+        $reservations = $rs->getReservations();
+
+        if(!$reservations){
+          $this->message = "There are no reservations.";
+        } else {
+	     foreach ($reservations as $reservation) {
+              $ps = new ProjectionService();
+              $projection = $ps->getProjectionById($reservation->id_projection);
+              $ms = new MovieService();
+              $movie = $ms->getMovieById($projection->id_movie);
+              $us = new UserService();
+              $user = $us->getUserById($reservation->id_user);
+
+              $res = array("reservation" => $reservation, "projection" => $projection, "movie" => $movie, "user" => $user);
+              $allReservations[] = $res;
+            }
+		        usort($allReservations, function ($a, $b) {
+                return strtotime($b["projection"]->date) - strtotime($a["projection"]->date);
+            });
+        }
+
+        require_once __DIR__ . '/../view/allreservations.php';
+    }
+      
     function newReservation2() //rezervacije za $role = 2
     {
         if (isset($_GET['id_projection'])) {

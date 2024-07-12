@@ -432,3 +432,10 @@ button, .buttons a {
     border-top-right-radius: 15px; 
     border-bottom-right-radius: 15px; 
 }
+
+.table-reservations {
+    width: 96%;
+    padding: 20px;
+    margin: auto;
+}
+
