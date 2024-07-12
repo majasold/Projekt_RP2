@@ -1,12 +1,12 @@
 <?php require_once __DIR__ . '/header.php'; ?>
 
 <div class="projections">
-    <form action="index.php?rt=projections/newProjection" method="post"> 
+<form action="index.php?rt=projections/newProjection" method="post"> 
         <label>Movie Title</label><br>
         <select name="id_movie" id="movies">
             <?php foreach ($movies as $movie): ?>
-                <option value="<?php echo htmlspecialchars($movie['id']); ?>">
-                    <?php echo htmlspecialchars($movie['name']); ?>
+                <option value="<?php echo $movie->id; ?>">
+                    <?php echo $movie->name; ?>
                 </option>
             <?php endforeach; ?>
         </select>

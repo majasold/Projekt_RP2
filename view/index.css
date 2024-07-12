@@ -220,9 +220,18 @@ footer p{
     width: 33%;
 }
 
+#midbox {
+    width: 50%;
+}
+
 #rightbox {
     float: right;
     width: 33%;
+}
+
+#rightbox2 {
+    float: right;
+    width: 65%;
 }
 
 .newReservation1_header, .checkout{
@@ -265,6 +274,14 @@ footer p{
     background-color: #9d9b9b;
 }
 
+.seat.taken2{
+    background-color: #9d9b9b;
+}
+
+.seat.delete{
+    background-color: #c34747;
+}
+
 .row:first-child .seat {
     margin-bottom: 20px; 
 }
@@ -296,6 +313,41 @@ footer p{
 
 .showcase li small {
     margin-left: 5px;
+}
+
+.price {
+    list-style-type: none; /* Remove default bullets */
+    padding-left: 0; /* Remove default padding */
+}
+
+.price li {
+    padding-left: 25px; /* Add space for custom bullet */
+    position: relative; /* Positioning context for pseudo-element */
+}
+
+.price li::before {
+    content: ''; /* Default empty content */
+    position: absolute; /* Position relative to parent li */
+    left: 0; /* Align to left */
+    font-size: 18px; /* Adjust size */
+}
+
+.price li.positive::before {
+    content: '+';
+    padding-right: 10px; /* Add space between bullet and text */
+}
+
+.price li.negative::before {
+    content: '-';
+    padding-right: 10px; /* Add space between bullet and text */
+}
+
+.price li.positive::before {
+    content: '+';
+}
+
+.price li.negative::before {
+    content: '-';
 }
 
 .screen {
@@ -336,6 +388,55 @@ button, .buttons a {
 .buttons{
     display: flex;
     justify-content: flex-end;
+}
+
+.qr-container
+{
+    display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+}
+
+.reservations {
+    width: 100%;
+    border-collapse: separate; 
+    border-spacing: 0 10px; 
+    table-layout: fixed;
+    text-align: middle;
+}
+
+.reservations th, .reservations td {
+    padding: 10px 20px; 
+    text-align: center;
+}
+
+.reservations tbody tr {
+    border-radius: 15px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    overflow: hidden; 
+}
+
+.reservations tbody tr td {
+    border-top: 1px solid #f2f2f2; 
+    border-bottom: 1px solid #f2f2f2; 
+}
+
+.reservations th:first-child, .reservations td:first-child {
+    border-top-left-radius: 15px; 
+    border-bottom-left-radius: 15px; 
+}
+
+.reservations th:last-child, .reservations td:last-child {
+    border-top-right-radius: 15px; 
+    border-bottom-right-radius: 15px; 
+}
+
+.table-reservations {
+    width: 96%;
+    padding: 20px;
+    margin: auto;
 }
 
 /*new Projection*/

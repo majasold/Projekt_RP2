@@ -120,5 +120,31 @@ class ProjectionsController
         }
         $this->projections();
         //require_once __DIR__ . '/../view/projectionsDelete.php';
-    }    
+    }   
+    
+    function projections() //opcija PROJECTION za $role = 3
+    {
+        $title = 'Projections';
+
+        $allProjections = [];
+        $ps = new ProjectionService();
+        $projections = $ps->getProjections();
+
+        if(!$projections){
+          $this->message = "There are no projections.";
+        } else {
+	        foreach ($projections as $projection) {
+                $ms = new MovieService();
+                $movie = $ms->getMovieById($projection->id_movie);
+               
+                $proj = array("projection" => $projection, /*"reservation" => $reservation, */"movie" => $movie/*, "user" => $user*/);
+                $allProjections[] = $proj;
+            }
+		    usort($allProjections, function ($a, $b) {
+                return strtotime($b["projection"]->date) - strtotime($a["projection"]->date);
+            });
+        }
+
+        require_once __DIR__ . '/../view/projectionsDelete.php';
+    }
 }
