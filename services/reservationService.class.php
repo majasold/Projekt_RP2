@@ -79,5 +79,62 @@ class ReservationService
         return $reservations;
     }
 
+    function getReservationById($id)
+    {
+        $db = DB::getConnection();
+        $st = $db->prepare('SELECT * FROM rezervacija WHERE id_rezervacija = :id_rezervacija');
+        $st->execute(['id_rezervacija' => $id]);
+        $row = $st->fetch();
+        if ($row !== false) {
+            $reservation = new Reservation($row['id_rezervacija'], $row['id_korisnik'], $row['id_projekcija'], $row['red'], $row['stupac'], $row['cijena'], $row['created']);
+            return $reservation;
+        }
+        return false;
+    }
 
+    function insertNewReservation($idUser, $idProjection, $row, $column, $price)
+    {
+        $db = DB::getConnection();
+        $st = $db->prepare('INSERT INTO rezervacija (id_korisnik, id_projekcija, red, stupac, cijena) VALUES (?, ?, ?, ?, ?)');
+        $data = array($idUser, $idProjection, $row, $column, $price);
+        $st->execute($data);
+
+        if ($st->rowCount() > 0) {
+            $id = $db->lastInsertId();
+            $reservation = $this->getReservationById($id);
+            return $reservation;
+        }
+        return false;
+    }
+
+    function deleteReservationByProjectionRowCol($idProjection, $row, $col)
+    {
+        $db = DB::getConnection();
+        $st = $db->prepare('DELETE FROM rezervacija WHERE id_projekcija = :id_projekcija AND red = :red AND stupac = :stupac');
+        $st->execute([
+            'id_projekcija' => $idProjection,
+            'red' => $row,
+            'stupac' => $col
+        ]);
+
+    }
+
+    function getReservationByProjectionRowCol($idProjection, $row, $col)
+    {
+        $db = DB::getConnection();
+        $st = $db->prepare('SELECT * FROM rezervacija WHERE id_projekcija = :id_projekcija AND red = :red AND stupac = :stupac');
+        $st->execute([
+            'id_projekcija' => $idProjection,
+            'red' => $row,
+            'stupac' => $col
+        ]);
+
+        $row = $st->fetch();
+        if ($row !== false) {
+            $reservation = new Reservation($row['id_rezervacija'], $row['id_korisnik'], $row['id_projekcija'], $row['red'], $row['stupac'], $row['cijena'], $row['created']);
+            return $reservation;
+        }
+        return false;
+
+    }
 }

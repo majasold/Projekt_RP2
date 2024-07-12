@@ -19,10 +19,15 @@ body
 }
 
 footer p{
+    /*position: fixed;*/
+    left: 0;
+    bottom: 0;
+    width: 100%;
     text-align: center;
     padding: 3px;
     color: white;
 }
+
 
 .header .title{
     display: flex;
@@ -56,7 +61,7 @@ footer p{
 .header .routes a:hover{
     color:rgba(20,139,160,1);
     background: #ccc;
-
+    
 }
 
 .movies-container {
@@ -104,6 +109,7 @@ footer p{
     box-sizing: border-box;
 }
 
+/*overview_projections*/
 .movie-spec-container {
     display: flex;
     justify-content: space-between;
@@ -115,20 +121,20 @@ footer p{
 
 .movie-spec {
     width: 48%;
-    box-sizing: border-box;
+    box-sizing: border-box; 
     display: flex;
     align-items: center;
     text-align: center;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: column; 
+    justify-content: center;  
 }
 
 .video-wrapper {
     position: relative;
     width: 100%;
-    padding-bottom: 56.25%;
+    padding-bottom: 56.25%; 
     height: 0;
-    overflow: hidden;
+    overflow: hidden; 
     border-radius: 15px;
 }
 
@@ -151,10 +157,280 @@ footer p{
 
 .projections {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 10px;
+    border-collapse: separate; 
+    border-spacing: 0 10px; 
     table-layout: fixed;
     text-align: middle;
+}
+
+.projections th, .projections td {
+    padding: 10px 20px; 
+    text-align: center;
+}
+
+.projections tbody tr {
+    border-radius: 15px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    overflow: hidden; 
+}
+
+.projections tbody tr:hover {
+    color:rgba(20,139,160,1);
+    background: #ccc; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); 
+}
+
+.projections tbody tr td {
+    border-top: 1px solid #f2f2f2; 
+    border-bottom: 1px solid #f2f2f2; 
+}
+
+.projections th:first-child, .projections td:first-child {
+    border-top-left-radius: 15px; 
+    border-bottom-left-radius: 15px; 
+}
+
+.projections th:last-child, .projections td:last-child {
+    border-top-right-radius: 15px; 
+    border-bottom-right-radius: 15px; 
+}
+
+/*newRegistration_1*/
+
+.newReservation1-container {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.newReservation1 {
+    display: inline-block;
+    vertical-align: top;
+    justify-content: space-between;
+}
+
+#leftbox {
+    float: left;
+    width: 33%;
+}
+
+#middlebox {
+    float: left;
+    width: 33%;
+}
+
+#midbox {
+    width: 50%;
+}
+
+#rightbox {
+    float: right;
+    width: 33%;
+}
+
+#rightbox2 {
+    float: right;
+    width: 65%;
+}
+
+.newReservation1_header, .checkout{
+    border-style: solid;
+    border-width: 2px;
+    border-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px;
+}
+
+.hall-container {
+    flex: 1 1 0px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    align-items: center;
+    margin: auto;
+}
+
+.seat {
+    background-color: #444451;
+    height: 12px;
+    width: 15px;
+    margin: 3px;
+    padding: 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.row{
+    display: flex;
+}
+
+.seat.selected{
+    background-color: #6feaf6;
+}
+
+.seat.taken{
+    background-color: #9d9b9b;
+}
+
+.seat.taken2{
+    background-color: #9d9b9b;
+}
+
+.seat.delete{
+    background-color: #c34747;
+}
+
+.row:first-child .seat {
+    margin-bottom: 20px; 
+}
+
+.row:last-child .seat {
+    margin-top: 20px; 
+}
+
+.seat:not(.taken):hover {
+    transform: scale(1.2);
+}
+
+.showcase .seat:not(.taken):hover {
+    transform: scale(1);
+}
+
+.showcase {
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.showcase li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+}
+
+.showcase li small {
+    margin-left: 5px;
+}
+
+.price {
+    list-style-type: none; /* Remove default bullets */
+    padding-left: 0; /* Remove default padding */
+}
+
+.price li {
+    padding-left: 25px; /* Add space for custom bullet */
+    position: relative; /* Positioning context for pseudo-element */
+}
+
+.price li::before {
+    content: ''; /* Default empty content */
+    position: absolute; /* Position relative to parent li */
+    left: 0; /* Align to left */
+    font-size: 18px; /* Adjust size */
+}
+
+.price li.positive::before {
+    content: '+';
+    padding-right: 10px; /* Add space between bullet and text */
+}
+
+.price li.negative::before {
+    content: '-';
+    padding-right: 10px; /* Add space between bullet and text */
+}
+
+.price li.positive::before {
+    content: '+';
+}
+
+.price li.negative::before {
+    content: '-';
+}
+
+.screen {
+    background-color: #fff;
+    height: 70px;
+    width: 100%;
+    margin: 15px 0;
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.75);
+}
+
+.hall-cont {
+    perspective: 1000px;
+    margin-bottom: 30px;
+}
+
+.confirm_reservation {
+    justify-content: flex-end;
+    display: flex;
+}
+
+button, .buttons a {
+    float: right;
+    background: #706d6d;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.buttons button:hover, .buttons a:hover {
+    opacity: .7;
+}
+
+
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.qr-container
+{
+    display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+}
+
+.reservations {
+    width: 100%;
+    border-collapse: separate; 
+    border-spacing: 0 10px; 
+    table-layout: fixed;
+    text-align: middle;
+}
+
+.reservations th, .reservations td {
+    padding: 10px 20px; 
+    text-align: center;
+}
+
+.reservations tbody tr {
+    border-radius: 15px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    overflow: hidden; 
+}
+
+.reservations tbody tr td {
+    border-top: 1px solid #f2f2f2; 
+    border-bottom: 1px solid #f2f2f2; 
+}
+
+.reservations th:first-child, .reservations td:first-child {
+    border-top-left-radius: 15px; 
+    border-bottom-left-radius: 15px; 
+}
+
+.reservations th:last-child, .reservations td:last-child {
+    border-top-right-radius: 15px; 
+    border-bottom-right-radius: 15px; 
 }
 
 .table-reservations {
@@ -163,78 +439,3 @@ footer p{
     margin: auto;
 }
 
-
-.projections th, .projections td {
-    padding: 10px 20px;
-    text-align: center;
-}
-
-.projections tbody tr {
-    border-radius: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-}
-
-.projections tbody tr:hover {
-    color:rgba(20,139,160,1);
-    background: #ccc;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-.projections tbody tr td {
-    border-top: 1px solid #f2f2f2;
-    border-bottom: 1px solid #f2f2f2;
-}
-
-.projections th:first-child, .projections td:first-child {
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-}
-
-.projections th:last-child, .projections td:last-child {
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-h1.reservation {
-    text-align: center;
-    margin: 20px 10px;
-    width: 100%;
-}
-
-.checkbox {
-    width: 20px;
-    height: 20px;
-}
-
-button.submit {
-    margin-left: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: blue;
-    background-color: #ccc;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-button.submit:hover {
-    background-color: darkgrey;
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-}
-
-input {
-    width: 60%;
-    padding: 10px;
-    margin: 10px 10px;
-    border-radius: 5px;
-}
-
-label
-{
-    color: white;
-    font-size: 18px;
-    margin: 10px 10px;
-}

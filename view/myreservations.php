@@ -1,6 +1,6 @@
 <?php require_once __DIR__ . '/header.php'; ?>
 
-<h1 class="reservation" >MY RESERVATIONS</h1>
+<h1 class="reservation">MY RESERVATIONS</h1>
 
 <div class="table-reservations">
     <table class = "reservations">
@@ -29,6 +29,5 @@
       </tbody>
     </table>
 </div>
-
 
 <?php require_once __DIR__ . '/footer.php'; ?>
