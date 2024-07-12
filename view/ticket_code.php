@@ -7,9 +7,10 @@
 </main>
 
 <script>
-    let url = '<?php echo $this->generateURL($idReservation, $created, true); ?>'
-    let logoSrc = 'https://upload.wikimedia.org/wikipedia/commons/9/91/Faculty_of_Science_PMF_Zagreb.jpg'
+    <?php $ticketURL = $this->generateURL($idReservation, $created, true); ?>
+    let url = '<?php echo $ticketURL; ?>'
     console.log(url)
+    let logoSrc = 'https://upload.wikimedia.org/wikipedia/commons/9/91/Faculty_of_Science_PMF_Zagreb.jpg'
     let qrCode = new QRCode(document.createElement('div'), {
         text: url,
         width: 256,

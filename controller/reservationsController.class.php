@@ -13,7 +13,7 @@ class ReservationsController
 
     function index() // MY RESERVATION za $role = 1
     {
-	$title = "My reservations";
+        $title = "My reservations";
         $myReservations = [];
         if (isset($_SESSION['user'])) {
             $idUser = $_SESSION['user']->id;
@@ -74,59 +74,59 @@ class ReservationsController
 
     function deleteReservation() //brisanje razervacije za $role = 2
     {
-      $title = "Reservations";
-      $rs = new ReservationService();
-      $reservations = $rs->getReservations();
-      if(isset($_POST['reservations']) && is_array($_POST['reservations'])){
-          $id_reservations = $_POST['reservations'];
-          if(!$reservations){
-            $this->message = "There are no reservations.";
-          } else {
-              if(!$id_reservations){
-                $this->message = "There are no reservations to delete.";
-              } else {
-                  foreach ($id_reservations as $id_res) {
+        $title = "Reservations";
+        $rs = new ReservationService();
+        $reservations = $rs->getReservations();
+        if (isset($_POST['reservations']) && is_array($_POST['reservations'])) {
+            $id_reservations = $_POST['reservations'];
+            if (!$reservations) {
+                $this->message = "There are no reservations.";
+            } else {
+                if (!$id_reservations) {
+                    $this->message = "There are no reservations to delete.";
+                } else {
+                    foreach ($id_reservations as $id_res) {
                         $rs->deleteReservationById($id_res);
                     }
-              }
-          }
-      } else {
-         $this->message = "There are no reservations to delete.";
-      }
-      $this->reservations();
+                }
+            }
+        } else {
+            $this->message = "There are no reservations to delete.";
+        }
+        $this->reservations();
     }
 
     function reservations() //opcija RESERVATION za $role = 2
     {
-	$title = "Reservations";
+        $title = "Reservations";
         $allReservations = [];
         $rs = new ReservationService();
         $reservations = $rs->getReservations();
 
-        if(!$reservations){
-          $this->message = "There are no reservations.";
+        if (!$reservations) {
+            $this->message = "There are no reservations.";
         } else {
-	     foreach ($reservations as $reservation) {
-              $ps = new ProjectionService();
-              $projection = $ps->getProjectionById($reservation->id_projection);
-              $ms = new MovieService();
-              $movie = $ms->getMovieById($projection->id_movie);
-              $us = new UserService();
-              $user = $us->getUserById($reservation->id_user);
+            foreach ($reservations as $reservation) {
+                $ps = new ProjectionService();
+                $projection = $ps->getProjectionById($reservation->id_projection);
+                $ms = new MovieService();
+                $movie = $ms->getMovieById($projection->id_movie);
+                $us = new UserService();
+                $user = $us->getUserById($reservation->id_user);
 
-              $res = array("reservation" => $reservation, "projection" => $projection, "movie" => $movie, "user" => $user);
-              $allReservations[] = $res;
+                $res = array("reservation" => $reservation, "projection" => $projection, "movie" => $movie, "user" => $user);
+                $allReservations[] = $res;
             }
-		 usort($allReservations, function ($a, $b) {
-            		$dateTimeA = strtotime($a["projection"]->date . ' ' . $a["projection"]->time);
-            		$dateTimeB = strtotime($b["projection"]->date . ' ' . $b["projection"]->time);
-            		return $dateTimeB - $dateTimeA;
-        	});
+            usort($allReservations, function ($a, $b) {
+                $dateTimeA = strtotime($a["projection"]->date . ' ' . $a["projection"]->time);
+                $dateTimeB = strtotime($b["projection"]->date . ' ' . $b["projection"]->time);
+                return $dateTimeB - $dateTimeA;
+            });
         }
 
         require_once __DIR__ . '/../view/allreservations.php';
     }
-      
+
     function newReservation2() //rezervacije za $role = 2
     {
         if (isset($_GET['id_projection'])) {
@@ -176,7 +176,7 @@ class ReservationsController
                 $notSuccessfulReservations = [];
                 foreach ($myReservation as $reservation) {
                     $existingReservation = $rs->getReservationByProjectionRowCol($reservation['projectionId'], $reservation['row'], $reservation['col']);
-                    if(!$existingReservation){
+                    if (!$existingReservation) {
                         $success = $rs->insertNewReservation($_SESSION['user']->id, $reservation['projectionId'], $reservation['row'], $reservation['col'], $reservation['ticketPrice']);
                         if ($success) {
                             $successfulReservations[] = $success;
@@ -208,9 +208,9 @@ class ReservationsController
                 $notSuccessfulNewReservations = [];
                 $successfulDelReservations = [];
                 foreach ($myReservation as $reservation) {
-                    if($reservation['act'] === "add"){
+                    if ($reservation['act'] === "add") {
                         $existingReservation = $rs->getReservationByProjectionRowCol($reservation['projectionId'], $reservation['row'], $reservation['col']);
-                        if(!$existingReservation){
+                        if (!$existingReservation) {
                             $success = $rs->insertNewReservation($_SESSION['user']->id, $reservation['projectionId'], $reservation['row'], $reservation['col'], $reservation['ticketPrice']);
                             if ($success) {
                                 $successfulNewReservations[] = $success;
@@ -221,9 +221,9 @@ class ReservationsController
                     } else {
                         $rs->deleteReservationByProjectionRowCol($reservation['projectionId'], $reservation['row'], $reservation['col']);
                         //if ($success) {
-                            $successfulDelReservations[] = $reservation;
+                        $successfulDelReservations[] = $reservation;
                         //} else {
-                           // $notSuccessfulDelReservations[] = $reservation;
+                        // $notSuccessfulDelReservations[] = $reservation;
                         //}
                     }
                 }
@@ -234,7 +234,10 @@ class ReservationsController
 
     function generateURL($idReservation, $created, $codeCheck = false)
     {
-        $createdInt = strtotime($created);
+        if (!is_numeric($created))
+            $createdInt = strtotime($created);
+        else
+            $createdInt = $created;
         $url = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         // Parse the URL to get the path component
         $parsedUrl = parse_url($url);
@@ -267,8 +270,8 @@ class ReservationsController
     function ticketCodeCheck() // index.php?rt=reservations/ticketCodeCheck&id=1&created=...
     {
         $title = "Ticket details";
-        $created = urldecode($_GET['created']);
-        $idReservation = urldecode((int)$_GET['id']);
+        $created = $_GET['created'];
+        $idReservation = (int)$_GET['id'];
         $rs = new ReservationService();
         $reservation = $rs->getReservationById($idReservation);
         if ($reservation) {
