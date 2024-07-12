@@ -34,10 +34,11 @@
                   <td><?php echo $res["reservation"]->col; ?></td>
                   <?php $ticketCode = $this->generateURL($reservation->id_reservation, $reservation->created); ?>
                   <td><div class= "buttons">
-                          <button class = "qr" data-href = <?php echo " <a href='{$ticketCode}' target='_blank'>Ticket code</a>" ?> >
+                          <button type="button" class="qr" data-href="<?php echo $this->generateURL($res["reservation"]->id_reservation, $res["reservation"]->created); ?>">             
+				ticket QR code
                           </button>
-                      </div>
-                  </td>
+                     </div>                  
+		  </td>
               </tr>
           <?php endforeach; ?>
         </tbody>
@@ -45,5 +46,17 @@
   </div>
   <button type="submit" class="submit">DELETE</button>
 </form>
+
+<script>
+    $(document).ready(function() {
+        $('.qr').on('click', function() {
+            var href = $(this).data('href');
+            if (href) {
+                window.location.href = href;
+            }
+        });
+    });
+</script>
+
 
 <?php require_once __DIR__ . '/footer.php'; ?>
