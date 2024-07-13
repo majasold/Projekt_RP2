@@ -48,20 +48,24 @@ class ProjectionsController
     function newProjection()
     {
         $title = 'New Projection';
-
+        $ms = new MovieService();
+        $movies = $ms->getMovies();
         require_once __DIR__ . '/../view/newprojection.php';
+    }
 
-        $newProj = new ProjectionService();
+    function addNewProjection()
+    {
+        $ps = new ProjectionService();
         if (
             !empty($_POST['id_movie']) and
             !empty($_POST['date']) and !empty($_POST['time'])
             and !empty($_POST['id_hall']) and !empty($_POST['regular_price'])
         ) {
-            $id_movie = $_POST['id_movie'];//tu je select pa mozda drugacije
+            $id_movie = intval($_POST['id_movie']);
             $date = $_POST['date'];
             $time = $_POST['time'];
-            $cinema_hall = $_POST['id_hall'];
-            $ticket_price = $_POST['id_price'];
+            $id_hall = intval($_POST['id_hall']);
+            $regular_price = intval($_POST['regular_price']);
             $allFieldsOK = true;
 
             if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
@@ -83,11 +87,22 @@ class ProjectionsController
             } 
 
             if ($allFieldsOK) {
-                if (!$us->insertNewProjection($id_projekcija, $id_hall, $id_movie, $date, $time, $regular_price)) {
-                    $this->message = "Error in adding new projection. Please try again.";
+                list($hour, $minute) = explode(':', $time);
+                $hour = intval($hour);
+                $minute = intval($minute);
+
+                $formattedTime = sprintf("%02d:%02d:00", $hour, $minute);
+
+                if (!$ps->checkCollision($id_hall, $date, $time)) {
+                    $this->message = "There is a collision with an existing projection.";
                     require_once __DIR__ . '/../view/newprojection.php';
                 } else {
-                    header('Location: index.php?rt=projections');//?
+                    if (!$us->insertNewProjection($id_projekcija, $id_hall, $id_movie, $date, $time, $regular_price)) {
+                        $this->message = "Error in adding new projection. Please try again.";
+                        require_once __DIR__ . '/../view/newprojection.php';
+                    } else {
+                        header('Location: index.php?rt=projections');//?
+                    }
                 }
             }
         } else {
@@ -141,7 +156,9 @@ class ProjectionsController
                 $allProjections[] = $proj;
             }
 		    usort($allProjections, function ($a, $b) {
-                return strtotime($b["projection"]->date) - strtotime($a["projection"]->date);
+                $dateTimeA = strtotime($a["projection"]->date . ' ' . $a["projection"]->time);
+                $dateTimeB = strtotime($b["projection"]->date . ' ' . $b["projection"]->time);
+                return $dateTimeB - $dateTimeA;
             });
         }
 

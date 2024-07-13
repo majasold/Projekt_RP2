@@ -83,8 +83,6 @@ class UserService
         $db = DB::getConnection();
         $query = "UPDATE korisnik SET role = :role WHERE id_korisnik = :id_korisnik";
         $st = $this->db->prepare($query);
-        $st->bindParam(':role', $role);
-        $st->bindParam(':id_korisnik', $id);
-        return $st->execute();
+        return $st->execute(['role' => $role]);
     }
 }
