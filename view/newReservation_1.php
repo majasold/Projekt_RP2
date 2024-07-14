@@ -65,9 +65,9 @@
     function drawHall() {
         $('#seating').html('');
 
-        for (let i = 1; i <= hall.nr_rows; i++) {
+        for (let i = 1; i <= Number(hall.nr_rows); i++) {
             let $newRow = $('<div></div>').addClass('row');
-            for (let j = 1; j <= hall.nr_cols; j++) {
+            for (let j = 1; j <= Number(hall.nr_cols); j++) {
                 let $newSeat = $('<div></div>').addClass('seat');
                 //$newSeat.html('sjedalo');
                 reservations.forEach(element => {
@@ -81,7 +81,7 @@
                 if (i === 1) {
                     $newSeat.data('ticketPrice', 0.8 * projection.regular_price);
                     //console.log($newSeat.data('ticketPrice'));
-                } else if (i === hall.nr_rows) {
+                } else if (i === Number(hall.nr_rows)) {
                     $newSeat.data('ticketPrice', 1.2 * projection.regular_price);
                     //console.log($newSeat.data('ticketPrice'));
                 } else {
