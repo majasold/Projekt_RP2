@@ -13,10 +13,18 @@
             <tbody>
                 <?php foreach ($usersForChangeRole as $list) : ?>
                     <tr class="projections">
-                        <td class="projections"><?php echo $list["idKorisnik"]->idKorisnik; ?></td>
-                        <td class="projections"><?php echo $list["name"]->name; ?></td>
-                        <td class="projections"><?php echo $list["surname"]->surname; ?></td>
-                        <td class="projections"><?php echo $list["role"]->role; ?></td>
+                    <td class="projections" name="idKorisnik"><?php echo $list->name; ?></td>
+                        <td class="projections"><?php echo $list->surname; ?></td>
+                        <td class="projections">
+                            <input type="hidden" name="idKorisnik[]" value="<?php echo $list->id; ?>">
+                            <input type="hidden" name="currentRole[]" value="<?php echo $list->role; ?>">
+                            <select name="role[]">
+                                <option value="" selected disabled hidden>Choose here</option>
+                                <option value="1" <?php echo ($list->role == 1) ? 'selected' : ''; ?>>1</option>
+                                <option value="2" <?php echo ($list->role == 2) ? 'selected' : ''; ?>>2</option>
+                                <option value="3" <?php echo ($list->role == 3) ? 'selected' : ''; ?>>3</option>
+                            </select>
+                        </td>
                     </tr>
                 <?php endforeach; ?>  
             </tbody>

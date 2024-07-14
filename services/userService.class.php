@@ -81,8 +81,7 @@ class UserService
     function updateUserRole($id_korisnik, $role)
     {
         $db = DB::getConnection();
-        $query = "UPDATE korisnik SET role = :role WHERE id_korisnik = :id_korisnik";
-        $st = $this->db->prepare($query);
-        return $st->execute(['role' => $role]);
+        $st = $db->prepare('UPDATE korisnik SET role = :role WHERE id_korisnik = :id_korisnik');
+        $st->execute(['role' => $role, 'id_korisnik' => $id_korisnik]);
     }
 }

@@ -16,15 +16,15 @@
         </thead>
 
         <tbody class = "projections">
-          <?php foreach ($allProjections as $proj) : ?>
-              <tr>
-                  <td><input type = "checkbox" name = "projections[]" value = "<?php echo $res["projection"]->id_projection; ?>" class = "checkbox"></td>
-                  <td><?php echo $res["movie"]->name; ?></td>
-                  <td><?php echo $res["projection"]->date; ?></td>
-                  <td><?php echo $res["projection"]->time; ?></td>
-                  <td><?php echo $res["projection"]->id_hall; ?></td>
-              </tr>
-          <?php endforeach; ?>
+        <?php for ($i = 0; $i < sizeof($projections); $i++) : ?>
+          <tr>
+            <td><input type="checkbox" name="projections[]" value="<?php echo $projections[$i]->id_projection; ?>" class="checkbox"></td>
+            <td><?php echo $movies[$i]->name; ?></td>
+            <td><?php echo $projections[$i]->date; ?></td>
+            <td><?php echo $projections[$i]->time; ?></td>
+            <td><?php echo $projections[$i]->id_hall; ?></td>
+          </tr>
+        <?php endfor; ?>
         </tbody>
       </table>
   </div>

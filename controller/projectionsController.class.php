@@ -65,14 +65,14 @@ class ProjectionsController
             $date = $_POST['date'];
             $time = $_POST['time'];
             $id_hall = intval($_POST['id_hall']);
-            $regular_price = intval($_POST['regular_price']);
+            $regular_price = floatval($_POST['regular_price']);
             $allFieldsOK = true;
 
             if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
                 $allFieldsOK = false;
                 $this->message = "Invalid date format.";
                 require_once __DIR__ . '/../view/newprojection.php';
-            } elseif (!preg_match('/^\d{2}:\d{2}$/', $time)) {
+            } elseif (!preg_match('/^\d{2}:\d{2}$/', $time) || intval(substr($time, 0, 2)) < 0 || intval(substr($time, 0, 2)) > 23 || intval(substr($time, 3, 2)) < 0 || intval(substr($time, 3, 2)) > 59) {
                 $allFieldsOK = false;
                 $this->message = "Invalid time format";
                 require_once __DIR__ . '/../view/newprojection.php';
@@ -92,12 +92,13 @@ class ProjectionsController
                 $minute = intval($minute);
 
                 $formattedTime = sprintf("%02d:%02d:00", $hour, $minute);
+                $formattedTime = $time . ':00';
 
                 if (!$ps->checkCollision($id_hall, $date, $time)) {
                     $this->message = "There is a collision with an existing projection.";
                     require_once __DIR__ . '/../view/newprojection.php';
                 } else {
-                    if (!$us->insertNewProjection($id_projekcija, $id_hall, $id_movie, $date, $time, $regular_price)) {
+                    if (!$ps->insertNewProjection($id_hall, $id_movie, $date, $formattedTime, $regular_price)) {
                         $this->message = "Error in adding new projection. Please try again.";
                         require_once __DIR__ . '/../view/newprojection.php';
                     } else {
@@ -111,55 +112,59 @@ class ProjectionsController
         }
     }
 
+    function index() {
+        $this->projections();
+    }
+
     function projectionDelete() //brisanje projekcija za $role = 3
     {
         $title = 'Projection';
-
+        $ms = new MovieService();
         $ps = new ProjectionService();
         $projections = $ps->getProjections();
-        if(isset($_POST['projections']) && is_array($_POST['projections'])){
-            $id_projections = $_POST['projections'];
-            if(!$projections){
+        if (!$projections)
             $this->message = "There are no projections.";
-        } else {
-            if(!$id_projections){
-            $this->message = "There are no reservations to delete.";
-            } else {
-                foreach ($id_projections as $id_proj) {
-                     $ps->deleteProjectionById($id_proj);
+        else {
+            $movies = [];
+            foreach ($projections as $projection) {
+                $movies[] = $ms->getMovieById($projection->id_movie);
+            }
+        }
+        if (isset($_POST['projections'])) {
+            $success = true;
+            foreach ($_POST['projections'] as $idProjection) {
+                if (!$ps->deleteProjectionById((int)$idProjection)) {
+                    echo $idProjection;
+                    $success = false;
+                }
+            }
+            $projections = $ps->getProjections();
+            if (!$projections)
+                $this->message = "There are no projections.";
+            else {
+                $movies = [];
+                foreach ($projections as $projection) {
+                    $movies[] = $ms->getMovieById($projection->id_movie);
                 }
             }
         }
-        } else {
-            $this->message = "There are no projections to delete.";
-        }
-        $this->projections();
-        //require_once __DIR__ . '/../view/projectionsDelete.php';
+        require_once __DIR__ . '/../view/projectionsDelete.php';
     }   
     
     function projections() //opcija PROJECTION za $role = 3
     {
         $title = 'Projections';
 
-        $allProjections = [];
+        $ms = new MovieService();
         $ps = new ProjectionService();
         $projections = $ps->getProjections();
-
-        if(!$projections){
-          $this->message = "There are no projections.";
-        } else {
-	        foreach ($projections as $projection) {
-                $ms = new MovieService();
-                $movie = $ms->getMovieById($projection->id_movie);
-               
-                $proj = array("projection" => $projection, /*"reservation" => $reservation, */"movie" => $movie/*, "user" => $user*/);
-                $allProjections[] = $proj;
+        if (!$projections)
+            $this->message = "There are no projections.";
+        else {
+            $movies = [];
+            foreach ($projections as $projection) {
+                $movies[] = $ms->getMovieById($projection->id_movie);
             }
-		    usort($allProjections, function ($a, $b) {
-                $dateTimeA = strtotime($a["projection"]->date . ' ' . $a["projection"]->time);
-                $dateTimeB = strtotime($b["projection"]->date . ' ' . $b["projection"]->time);
-                return $dateTimeB - $dateTimeA;
-            });
         }
 
         require_once __DIR__ . '/../view/projectionsDelete.php';

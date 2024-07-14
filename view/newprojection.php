@@ -1,7 +1,8 @@
 <?php require_once __DIR__ . '/header.php'; ?>
 
 <div class="projections">
-<form action="index.php?rt=projections/addNewProjection" method="post"> 
+<form action="index.php?rt=projections/addNewProjection" method="post">
+    <div class="add-new-movie">
         <label>Movie Title</label><br>
         <select name="id_movie" id="movies">
             <?php foreach ($movies as $movie): ?>
@@ -30,6 +31,7 @@
         <div class="button">
             <button type="submit">Submit</button>
         </div>
+    </div>
     </form>
 </div>   
 

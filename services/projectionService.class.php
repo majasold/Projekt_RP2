@@ -8,7 +8,7 @@ class ProjectionService
     function getProjections()
     {
         $db = DB::getConnection();
-        $st = $db->prepare('SELECT * FROM projekcija');
+        $st = $db->prepare('SELECT * FROM projekcija ORDER BY datum DESC, vrijeme DESC');
         $st->execute();
 
         $projections = [];
@@ -56,23 +56,26 @@ class ProjectionService
         return $projections;
     }
 
+    function checkCollision($id_hall, $date, $time) 
+    {
+        $db = DB::getConnection();
+        $st = $db->prepare("SELECT * FROM projekcija WHERE vrijeme < ADDTIME(:time, '3:00:00') AND :time < ADDTIME(vrijeme, '3:00:00') AND id_dvorana = :id_hall AND datum = :date");
+        $st->execute([':time' => $time, ':id_hall' => $id_hall, ':date' => $date]);
+
+        return $st->rowCount() === 0;
+    }
+
     function insertNewProjection($id_hall, $id_movie, $date, $time, $regular_price)
     {
         $db = DB::getConnection();
         $st = $db->prepare('INSERT INTO projekcija (id_dvorana, id_filma, datum, vrijeme, regular_cijena) VALUES (:id_hall, :id_movie, :date, :time, :regular_price)');
-        $st->bindParam(':id_hall', $id_hall, PDO::PARAM_INT);
-        $st->bindParam(':id_movie', $id_movie, PDO::PARAM_INT);
-        $st->bindParam(':date', $date, PDO::PARAM_STR);
-        $st->bindParam(':time', $time, PDO::PARAM_STR);
-        $st->bindParam(':regular_price', $regular_price, PDO::PARAM_STR);
-        $st->execute();
+        $success = $st->execute([':id_hall'=>$id_hall, ':id_movie'=>$id_movie, ':date'=> $date, ':time'=> $time, ':regular_price'=>$regular_price]);
         
-        if ($st->rowCount() > 0) {
-            $id = $db->lastInsertId();//?
-            $proj = $this->getProjectionsByMovieId($id);
-            return $proj;
+        if ($success) {
+            return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     function deleteProjectionById($idProjection)
@@ -81,5 +84,8 @@ class ProjectionService
         $st = $db->prepare('DELETE FROM projekcija WHERE id_projekcija = :id_projekcija');
         $st->execute(['id_projekcija' => $idProjection]);
 
+        if ($st->rowCount() > 0)
+            return true;
+        return false;
     }
 }
