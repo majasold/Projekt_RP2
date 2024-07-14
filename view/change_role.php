@@ -1,5 +1,7 @@
 <?php require_once __DIR__ . '/header.php'; ?>
 
+<?php $roleNames = [1 => 'user', 2 => 'employee', 3 => 'admin']; ?>
+
 <form method="post" action="index.php?rt=home/changeThisRole">
     <div class="projections-container">
         <table class="projections">
@@ -20,9 +22,11 @@
                             <input type="hidden" name="currentRole[]" value="<?php echo $list->role; ?>">
                             <select name="role[]">
                                 <option value="" selected disabled hidden>Choose here</option>
-                                <option value="1" <?php echo ($list->role == 1) ? 'selected' : ''; ?>>1</option>
-                                <option value="2" <?php echo ($list->role == 2) ? 'selected' : ''; ?>>2</option>
-                                <option value="3" <?php echo ($list->role == 3) ? 'selected' : ''; ?>>3</option>
+                                <?php foreach ($roleNames as $roleValue => $roleName) : ?>
+                                    <option value="<?php echo $roleValue; ?>" <?php echo ($list->role == $roleValue) ? 'selected' : ''; ?>>
+                                        <?php echo $roleName; ?>
+                                    </option>
+                                <?php endforeach; ?>
                             </select>
                         </td>
                     </tr>
