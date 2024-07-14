@@ -60,4 +60,23 @@ class MovieService
 
         move_uploaded_file($poster_file, __DIR__ . '/../images/' . 'movie_' . $id_filma . '.jpg');
     }
+
+    function deleteIfNeeded($idMovie)
+    {
+        $db = DB::getConnection();
+        $st = $db->prepare('SELECT * FROM projekcija WHERE id_filma=:id_filma');
+        $st->execute(['id_filma' => $idMovie]);
+
+        $numberOfRows = 0;
+        while ($row = $st->fetch()) {
+            $numberOfRows++;
+        }
+        if ($numberOfRows === 0) {
+            $st = $db->prepare('DELETE FROM film WHERE id_film=:id_filma');
+            $st->execute(['id_filma' => $idMovie]);
+            if ($st->rowCount() > 0)
+                return true;
+        }
+        return false;
+    }
 }

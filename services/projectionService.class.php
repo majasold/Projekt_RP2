@@ -23,7 +23,7 @@ class ProjectionService
         return $projections;
     }
 
-    
+
     function getProjectionById($idProjection)
     {
         $db = DB::getConnection();
@@ -56,7 +56,7 @@ class ProjectionService
         return $projections;
     }
 
-    function checkCollision($id_hall, $date, $time) 
+    function checkCollision($id_hall, $date, $time)
     {
         $db = DB::getConnection();
         $st = $db->prepare("SELECT * FROM projekcija WHERE vrijeme < ADDTIME(:time, '3:00:00') AND :time < ADDTIME(vrijeme, '3:00:00') AND id_dvorana = :id_hall AND datum = :date");
@@ -69,8 +69,8 @@ class ProjectionService
     {
         $db = DB::getConnection();
         $st = $db->prepare('INSERT INTO projekcija (id_dvorana, id_filma, datum, vrijeme, regular_cijena) VALUES (:id_hall, :id_movie, :date, :time, :regular_price)');
-        $success = $st->execute([':id_hall'=>$id_hall, ':id_movie'=>$id_movie, ':date'=> $date, ':time'=> $time, ':regular_price'=>$regular_price]);
-        
+        $success = $st->execute([':id_hall' => $id_hall, ':id_movie' => $id_movie, ':date' => $date, ':time' => $time, ':regular_price' => $regular_price]);
+
         if ($success) {
             return true;
         } else {

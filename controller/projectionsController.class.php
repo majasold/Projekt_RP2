@@ -49,6 +49,8 @@ class ProjectionsController
     {
         $title = 'New Projection';
         $ms = new MovieService();
+        $hs = new HallService();
+        $halls = $hs->getHalls();
         $movies = $ms->getMovies();
         require_once __DIR__ . '/../view/newprojection.php';
     }
@@ -84,7 +86,7 @@ class ProjectionsController
                 $allFieldsOK = false;
                 $this->message = "Ticket Price must be a positive number.";
                 require_once __DIR__ . '/../view/newprojection.php';
-            } 
+            }
 
             if ($allFieldsOK) {
                 list($hour, $minute) = explode(':', $time);
@@ -102,7 +104,7 @@ class ProjectionsController
                         $this->message = "Error in adding new projection. Please try again.";
                         require_once __DIR__ . '/../view/newprojection.php';
                     } else {
-                        header('Location: index.php?rt=projections');//?
+                        header('Location: index.php?rt=projections'); //?
                     }
                 }
             }
@@ -112,7 +114,8 @@ class ProjectionsController
         }
     }
 
-    function index() {
+    function index()
+    {
         $this->projections();
     }
 
@@ -133,10 +136,12 @@ class ProjectionsController
         if (isset($_POST['projections'])) {
             $success = true;
             foreach ($_POST['projections'] as $idProjection) {
+                $projection = $ps->getProjectionById($idProjection);
                 if (!$ps->deleteProjectionById((int)$idProjection)) {
                     echo $idProjection;
                     $success = false;
                 }
+                $ms->deleteIfNeeded($projection->id_movie);
             }
             $projections = $ps->getProjections();
             if (!$projections)
@@ -149,8 +154,8 @@ class ProjectionsController
             }
         }
         require_once __DIR__ . '/../view/projectionsDelete.php';
-    }   
-    
+    }
+
     function projections() //opcija PROJECTION za $role = 3
     {
         $title = 'Projections';

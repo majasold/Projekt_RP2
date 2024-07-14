@@ -14,10 +14,26 @@ class HallService
 
         $row = $st->fetch();
         if ($row !== false) {
-            $hall = new Hall($row['id_dvorana'], $row['br_redova'] , $row['br_stupaca']);
+            $hall = new Hall($row['id_dvorana'], $row['br_redova'], $row['br_stupaca']);
             return $hall;
         }
         return false;
     }
 
+    function getHalls()
+    {
+        $db = DB::getConnection();
+        $st = $db->prepare('SELECT * FROM dvorana');
+        $st->execute();
+
+        $halls = [];
+
+        while ($row = $st->fetch()) {
+            $hall = new Hall($row['id_dvorana'], $row['br_redova'], $row['br_stupaca']);
+            $halls[] = $hall;
+        }
+        if (sizeof($halls) > 0)
+            return $halls;
+        return false;
+    }
 }
