@@ -456,3 +456,41 @@ input
     margin: 10px 0;
     border-radius: 5px;
 }
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+}
+
+.add-new-movie {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.new-movie-input {
+    width: 60%;
+    padding: 10px;
+    margin: 10px 10px;
+    border-radius: 5px;
+}
+
+.new-movie {
+    color: white;
+    font-size: 18px;
+    margin: 10px 10px;
+}
+
+button.submit {
+    margin: 20px 10px 0 10px;
+}
+
+h1.reservation, h1.newmovie {
+    text-align: center;
+    margin: 20px 10px;
+    width: 100%;
+}
