@@ -109,7 +109,7 @@
                 projectionId: projection.id_projection,
                 row: $seat.data('row'),
                 col: $seat.data('col'),
-                ticketPrice: $seat.data('ticketPrice')
+                ticketPrice: Number($seat.data('ticketPrice'))
             };
             myReservation.push(newRSeat);
             updateCheckout();
@@ -122,7 +122,7 @@
 
         let $ul = $('<ul></ul>');
         myReservation.forEach(element => {
-            let $li = $('<li></li>').text("row: " + element.row +  ", column: " + element.col  +  ", ticket price: " +  element.ticketPrice + "€");
+            let $li = $('<li></li>').text("row: " + element.row + ", column: " + element.col + ", ticket price: " + element.ticketPrice + "€");
             $ul.append($li);
             totalPrice += element.ticketPrice;
         });
@@ -131,12 +131,12 @@
         $('.total').text('Total price: ' + totalPrice + '€');
     }
 
-    function sendReservation(){
-        if(myReservation.length){
+    function sendReservation() {
+        if (myReservation.length) {
             console.log(myReservation);
             let jsonData = JSON.stringify(myReservation);
-            console.log(jsonData); 
-          
+            console.log(jsonData);
+
             let encodedData = encodeURIComponent(jsonData);
 
             let url = 'index.php?rt=reservations/saveNewReservation1&my_reservation=' + encodedData;
