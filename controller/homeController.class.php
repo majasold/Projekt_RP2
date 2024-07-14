@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../services/movieService.class.php';
+require_once __DIR__ . '/../services/userService.class.php';
 
 class HomeController
 {

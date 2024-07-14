@@ -69,7 +69,7 @@ class UserService
         $users = [];
 
         while ($row = $st->fetch()) {
-            $projection = new User($row['id_korisnik'], $row['name'], $row['surname'], $row['role']);
+            $user = new User($row['id_korisnik'], $row['email'], $row['name'], $row['surname'], $row['password_hash'], $row['role']);
             $users[] = $user;
         }
         if (sizeof($users) === 0)
