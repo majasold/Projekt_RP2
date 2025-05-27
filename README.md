@@ -1,6 +1,6 @@
 # Cinema Management System
 
-This is a comprehensive web application built with **PHP** and **JavaScript** designed to streamline the entire cinema operation, from user ticket reservations to administrative management of films and user roles.
+This is a comprehensive web application built with **PHP** and **JavaScript** designed to streamline the entire cinema operation, from user ticket reservations to administrative management of films and user roles. You can try app on https://rp2.studenti.math.hr/~petrsala/Projekt_RP2/.
 
 ---
 
